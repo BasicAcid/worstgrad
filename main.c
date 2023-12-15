@@ -15,9 +15,6 @@ main(void)
     struct Value f = w_mul(&d, &e, "f");
     struct Value g = w_tanh(&f, "g");
 
-    /* struct Value *x = get_parents2(&f); */
-    /* print_node(&x[0]); */
-    /* print_node(&x[1]); */
     g.grad = 1.0;
 
     struct Stack stack;

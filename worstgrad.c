@@ -330,6 +330,7 @@ get_parents(struct Value *v)
     }
 }
 
+// Any use?
 struct Value
 *get_parents2(struct Value *v)
 {
@@ -337,7 +338,6 @@ struct Value
 
     if(strcmp("+", v->operator) == 0)
     {
-        // Allocate memory for an array of structs
         list = (struct Value*)malloc(2 * sizeof(struct Value));
 
         for(int i = 0; i < 2; i++)
