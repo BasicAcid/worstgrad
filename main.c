@@ -29,11 +29,7 @@ main(void)
 
     grandent_descent(&stack, h, 200);
 
-    // Print the content of the stack.
-    for(int i = stack.top; i >= 0; i--)
-    {
-        print_node(stack.items[i]);
-    }
+    print_stack(&stack);
 
     cleanup_stack(&stack);
 

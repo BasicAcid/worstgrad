@@ -71,3 +71,4 @@ struct Value *peek(struct Stack *stack);
 void init_stack(struct Stack *stack, int initial_capacity);
 void cleanup_stack(struct Stack *stack);
 void grandent_descent(struct Stack *stack, double h, int n);
+void print_stack(struct Stack *stack);

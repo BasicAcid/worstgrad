@@ -538,3 +538,12 @@ grandent_descent(struct Stack *stack, double h, int n)
         forward_stack(stack, h);
     }
 }
+
+void
+print_stack(struct Stack *stack)
+{
+    for(int i = stack->top; i >= 0; i--)
+    {
+        print_node(stack->items[i]);
+    }
+}
