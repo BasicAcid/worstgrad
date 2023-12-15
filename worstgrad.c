@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-// Constructor for Value
 struct Value
 create_value(double data, const char *label)
 {
