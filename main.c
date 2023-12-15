@@ -41,6 +41,22 @@ main(void)
     /*     //print_node(node); */
     /* } */
 
+    double h = 0.2;
+    a.data += a.grad * h;
+    b.data += b.grad * h;
+    d.data += d.grad * h;
+    e.data += e.grad * h;
+    f.data += f.grad * h;
+    g.data += g.grad * h;
+
+    backward_stack2(&g, &stack);
+
+    a.data += a.grad * h;
+    b.data += b.grad * h;
+    d.data += d.grad * h;
+    e.data += e.grad * h;
+    f.data += f.grad * h;
+    g.data += g.grad * h;
 
     // Print the content of the stack.
     for(int i = stack.top; i >= 0; i--)
