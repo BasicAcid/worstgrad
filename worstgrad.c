@@ -563,21 +563,21 @@ dfs_to_stack(struct Value *node, struct Stack *stack)
 /* } */
 
 // Destructive backward trough stack, so not really useful.
-void
-backward_stack(struct Value *top_node, struct Stack *stack)
-{
-    dfs_to_stack(top_node, stack);
+/* void */
+/* backward_stack(struct Value *top_node, struct Stack *stack) */
+/* { */
+/*     dfs_to_stack(top_node, stack); */
 
-    while(stack->top >= 0)
-    {
-        struct Value *node = pop(stack);
-        backward(node);
-        node->visited = false;
-    }
-}
+/*     while(stack->top >= 0) */
+/*     { */
+/*         struct Value *node = pop(stack); */
+/*         backward(node); */
+/*         node->visited = false; */
+/*     } */
+/* } */
 
 void
-backward_stack2(struct Value *top_node, struct Stack *stack)
+backward_stack(struct Stack *stack)
 {
     for(int i = stack->top; i >= 0; i--)
     {

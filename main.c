@@ -31,7 +31,7 @@ main(void)
     double h = 0.001;
 
     for (int i = 0; i < 3000; ++i) {
-        backward_stack2(&g, &stack);
+        backward_stack(&stack);
         forward_stack(&stack, h);
     }
 
@@ -39,7 +39,6 @@ main(void)
     for(int i = stack.top; i >= 0; i--)
     {
         print_node(stack.items[i]);
-        struct Value *node = stack.items[i];
     }
 
     cleanup_stack(&stack);
