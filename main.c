@@ -23,40 +23,17 @@ main(void)
     struct Stack stack;
 
     // Find a way to automate this.
-    int initialCapacity = 100;
-    init_stack(&stack, initialCapacity);
-
-    // backward_stack(&g, &stack);
-
-    //struct Value *peeked = peek(&stack);
-
+    int initial_capacity = 100;
+    init_stack(&stack, initial_capacity);
 
     dfs_to_stack(&g, &stack);
 
-    backward_stack2(&g, &stack);
+    double h = 0.001;
 
-    /* while(stack.top >= 0) */
-    /* { */
-    /*     struct Value *node = pop(&stack); */
-    /*     //print_node(node); */
-    /* } */
-
-    double h = 0.2;
-    a.data += a.grad * h;
-    b.data += b.grad * h;
-    d.data += d.grad * h;
-    e.data += e.grad * h;
-    f.data += f.grad * h;
-    g.data += g.grad * h;
-
-    backward_stack2(&g, &stack);
-
-    a.data += a.grad * h;
-    b.data += b.grad * h;
-    d.data += d.grad * h;
-    e.data += e.grad * h;
-    f.data += f.grad * h;
-    g.data += g.grad * h;
+    for (int i = 0; i < 3000; ++i) {
+        backward_stack2(&g, &stack);
+        forward_stack(&stack, h);
+    }
 
     // Print the content of the stack.
     for(int i = stack.top; i >= 0; i--)

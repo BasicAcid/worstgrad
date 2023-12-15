@@ -61,6 +61,7 @@ void print_node(struct Value *v);
 void backward(struct Value *result);
 void backward_stack(struct Value *top_node, struct Stack *stack);
 void backward_stack2(struct Value *top_node, struct Stack *stack);
+void forward_stack(struct Stack *stack, double h);
 void dfs_to_stack(struct Value *node, struct Stack *stack);
 /* void backward_stack2(struct Value *top_node, struct Stack2 *stack); */
 /* void dfs_to_stack2(struct Value *node, struct Stack2 *stack); */

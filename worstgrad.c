@@ -585,3 +585,13 @@ backward_stack2(struct Value *top_node, struct Stack *stack)
         backward(node);
     }
 }
+
+void
+forward_stack(struct Stack *stack, double h)
+{
+    for(int i = 0; i <= stack->top; i++)
+    {
+        struct Value *node = stack->items[i];
+        node->data += node->grad * h;
+    }
+}
