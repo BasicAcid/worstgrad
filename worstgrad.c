@@ -528,3 +528,13 @@ forward_stack(struct Stack *stack, double h)
         node->data += node->grad * h;
     }
 }
+
+void
+grandent_descent(struct Stack *stack, double h, int n)
+{
+    for (int i = 0; i < n; ++i)
+    {
+        backward_stack(stack);
+        forward_stack(stack, h);
+    }
+}

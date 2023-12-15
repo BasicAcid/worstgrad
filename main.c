@@ -27,10 +27,7 @@ main(void)
 
     double h = 0.001;
 
-    for (int i = 0; i < 3000; ++i) {
-        backward_stack(&stack);
-        forward_stack(&stack, h);
-    }
+    grandent_descent(&stack, h, 200);
 
     // Print the content of the stack.
     for(int i = stack.top; i >= 0; i--)
