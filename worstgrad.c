@@ -425,28 +425,6 @@ print_node(struct Value *v)
     printf("Data: %f, Label: %s, Grad: %f, Op: %s, Vis: %d\n", v->data, v->label, v->grad, v->operator, v->visited);
 }
 
-// DFS, but not used as we want in a precise order.
-// To remove?
-/* void */
-/* dfs(struct Value* node) */
-/* { */
-/*     if(node == NULL) */
-/*     { */
-/*         return; */
-/*     } */
-
-/*     printf("%s: %lf -> ", node->label, node->data); */
-
-/*     // Recursively traverse the children nodes. */
-/*     for(int i = 0; i < MAX_PARENTS; i++) */
-/*     { */
-/*         if(node->parents[i] != NULL) */
-/*         { */
-/*             dfs(node->parents[i]); */
-/*         } */
-/*     } */
-/* } */
-
 void
 print_graph(struct Value *head)
 {
@@ -515,12 +493,6 @@ cleanup_stack(struct Stack *stack)
     free(stack->items);
 }
 
-/* struct Value */
-/* *top(struct Stack *stack) */
-/* { */
-/*     return stack->items[stack->top]; */
-/* } */
-
 // DFS over tree and push to stack in order.
 void
 dfs_to_stack(struct Value *node, struct Stack *stack)
@@ -536,45 +508,6 @@ dfs_to_stack(struct Value *node, struct Stack *stack)
    }
     push(stack, node);
 }
-
-// Not used, same as the other dfs function, but contain a for loop
-// that seem to be used on graphs that are not fully connected (I
-// don't think there is a use here).
-// Also initialize a stack from within, it might be better (?)
-/* void */
-/* dfs_to_stack_alt(struct Value *nodes[], int num_nodes) */
-/* { */
-/*     struct Stack stack; */
-/*     stack.top = -1; */
-
-/*     for (int i = 0; i < num_nodes; i++) */
-/*     { */
-/*         if(!nodes[i]->visited) */
-/*         { */
-/*             dfs_to_stack(nodes[i], &stack); */
-/*         } */
-/*     } */
-
-/*     while (stack.top >= 0) */
-/*     { */
-/*         struct Value *node = pop(&stack); */
-/*         printf("Data: %f, Label: %s\n", node->data, node->label); */
-/*     } */
-/* } */
-
-// Destructive backward trough stack, so not really useful.
-/* void */
-/* backward_stack(struct Value *top_node, struct Stack *stack) */
-/* { */
-/*     dfs_to_stack(top_node, stack); */
-
-/*     while(stack->top >= 0) */
-/*     { */
-/*         struct Value *node = pop(stack); */
-/*         backward(node); */
-/*         node->visited = false; */
-/*     } */
-/* } */
 
 void
 backward_stack(struct Stack *stack)
