@@ -12,7 +12,7 @@ create_value(double data, const char *label)
     struct Value val;
     val.data = data;
     val.grad = 1.0; // Gradient of a value with respect to itself is 1 ?
-    snprintf(val.label, sizeof(val.label), "%s", label);  // Copy the label string
+    snprintf(val.label, sizeof(val.label), "%s", label);  // Copy the label string.
 
     // Setting the operator to something is necessary for get_parents() .
     snprintf(val.operator, sizeof(val.operator), "root");
@@ -533,7 +533,7 @@ dfs_to_stack(struct Value *node, struct Stack *stack)
         {
             dfs_to_stack(node->parents[i], stack);
         }
-    }
+   }
     push(stack, node);
 }
 
@@ -562,6 +562,7 @@ dfs_to_stack(struct Value *node, struct Stack *stack)
 /*     } */
 /* } */
 
+// Destructive backward trough stack, so not really useful.
 void
 backward_stack(struct Value *top_node, struct Stack *stack)
 {
@@ -570,8 +571,17 @@ backward_stack(struct Value *top_node, struct Stack *stack)
     while(stack->top >= 0)
     {
         struct Value *node = pop(stack);
-        //struct Value *node = peek(stack);
         backward(node);
         node->visited = false;
+    }
+}
+
+void
+backward_stack2(struct Value *top_node, struct Stack *stack)
+{
+    for(int i = stack->top; i >= 0; i--)
+    {
+        struct Value *node = stack->items[i];
+        backward(node);
     }
 }

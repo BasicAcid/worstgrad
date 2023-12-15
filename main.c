@@ -20,27 +20,36 @@ main(void)
     /* print_node(&x[1]); */
     g.grad = 1.0;
 
-    struct Stack stackb;
+    struct Stack stack;
 
-    // Choose an initial capacity for the stack
+    // Find a way to automate this.
     int initialCapacity = 100;
-    init_stack(&stackb, initialCapacity);
+    init_stack(&stack, initialCapacity);
 
-    backward_stack(&g, &stackb);
-    // backward_stack(&g, &stackb);
+    // backward_stack(&g, &stack);
 
-    struct Value *peeked = peek(&stackb);
+    //struct Value *peeked = peek(&stack);
+
+
+    dfs_to_stack(&g, &stack);
+
+    backward_stack2(&g, &stack);
+
+    /* while(stack.top >= 0) */
+    /* { */
+    /*     struct Value *node = pop(&stack); */
+    /*     //print_node(node); */
+    /* } */
 
 
     // Print the content of the stack.
-    dfs_to_stack(&g, &stackb);
-    while(stackb.top >= 0)
+    for(int i = stack.top; i >= 0; i--)
     {
-        struct Value *node = pop(&stackb);
-        print_node(node);
+        print_node(stack.items[i]);
+        struct Value *node = stack.items[i];
     }
 
-    cleanup_stack(&stackb);
+    cleanup_stack(&stack);
 
     /* Test template 2. ******************************************************/
 
