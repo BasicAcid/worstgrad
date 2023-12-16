@@ -8,14 +8,63 @@ main(void)
 {
     /* Test template 1. ******************************************************/
 
-    struct Value a = create_value(-2, "a");
-    struct Value b = create_value(3, "b");
-    struct Value d = w_mul(&a, &b, "d");
-    struct Value e = w_add(&a, &b, "e");
-    struct Value f = w_mul(&d, &e, "f");
-    struct Value g = w_tanh(&f, "g");
+    /* struct Value a = create_value(-2, "a"); */
+    /* struct Value b = create_value(3, "b"); */
+    /* struct Value d = w_mul(&a, &b, "d"); */
+    /* struct Value e = w_add(&a, &b, "e"); */
+    /* struct Value f = w_mul(&d, &e, "f"); */
+    /* struct Value g = w_tanh(&f, "g"); */
 
-    g.grad = 1.0;
+    /* g.grad = 1.0; */
+
+    /* struct Stack stack; */
+
+    /* // Find a way to automate this. */
+    /* int initial_capacity = 100; */
+    /* init_stack(&stack, initial_capacity); */
+
+    /* dfs_to_stack(&g, &stack); */
+
+    /* double h = 0.001; */
+
+    /* grandient_descent(&stack, h, 200); */
+
+    /* print_stack(&stack); */
+
+    /* cleanup_stack(&stack); */
+
+    /* Test template 2. ******************************************************/
+
+    struct Value x1 = create_value(2.0, "x1");
+    struct Value x2 = create_value(0.0, "x2");
+    struct Value w1 = create_value(-3.0, "w1");
+    struct Value w2 = create_value(1.0, "w2");
+
+    struct Value b = create_value(6.8813735870195432, "b");
+
+    struct Value x1w1 = w_mul(&x1, &w1, "x1w1");
+    struct Value x2w2 = w_mul(&x2, &w2, "x2w2");
+    struct Value x1w1x2w2 = w_add(&x1w1, &x2w2, "x1*w1 + x2*w2");
+
+    struct Value n = w_add(&x1w1x2w2, &b, "n");
+
+    // Intermediate values.
+    struct Value z = create_value(2.0, "z");
+    struct Value x = w_mul(&n, &z, "x");
+
+    /* e = (2*n).exp() */
+    struct Value e = w_exp(&x, "e");
+
+    // Intermediate values.
+    struct Value io1 = create_value(1.0, "io1");
+    struct Value io2 = create_value(1.0, "io2");
+    struct Value io3 = w_sub(&e, &io1, "io3");
+    struct Value io4 = w_add(&e, &io2, "io4");
+
+    /* o = (e - 1) / (e + 1) */
+    struct Value o = w_div(&io3, &io4, "o");
+
+    o.grad = 1.0;
 
     struct Stack stack;
 
@@ -23,60 +72,15 @@ main(void)
     int initial_capacity = 100;
     init_stack(&stack, initial_capacity);
 
-    dfs_to_stack(&g, &stack);
+    dfs_to_stack(&o, &stack);
 
     double h = 0.001;
 
-    grandent_descent(&stack, h, 200);
+    grandient_descent(&stack, h, 100);
 
     print_stack(&stack);
 
     cleanup_stack(&stack);
-
-    /* Test template 2. ******************************************************/
-
-    /* struct Value x1 = create_value(2.0, "x1"); */
-    /* struct Value x2 = create_value(0.0, "x2"); */
-    /* struct Value w1 = create_value(-3.0, "w1"); */
-    /* struct Value w2 = create_value(1.0, "w2"); */
-
-    /* struct Value b = create_value(6.8813735870195432, "b"); */
-
-    /* struct Value x1w1 = mul(&x1, &w1, "x1w1"); */
-    /* struct Value x2w2 = mul(&x2, &w2, "x2w2"); */
-    /* struct Value x1w1x2w2 = add(&x1w1, &x2w2, "x1*w1 + x2*w2"); */
-
-    /* struct Value n = add(&x1w1x2w2, &b, "n"); */
-
-    /* // Intermediate values. */
-    /* struct Value z = create_value(2.0, "z"); */
-    /* struct Value x = mul(&n, &z, "x"); */
-
-    /* /\* e = (2*n).exp() *\/ */
-    /* struct Value e = _exp(&x, "e"); */
-
-    /* // Intermediate values. */
-    /* struct Value io1 = create_value(1.0, "io1"); */
-    /* struct Value io2 = create_value(1.0, "io2"); */
-    /* struct Value io3 = sub(&e, &io1, "io3"); */
-    /* struct Value io4 = add(&e, &io2, "io4"); */
-
-    /* /\* o = (e - 1) / (e + 1) *\/ */
-    /* struct Value o = _div(&io3, &io4, "o"); */
-
-    /* o.grad = 1; */
-
-    /* struct Stack stack; */
-    /* stack.top = -1; */
-
-    /* backward_dfs(&o, &stack); */
-
-    /* dfs_topological(&o, &stack); */
-
-    /* while (stack.top >= 0) { */
-    /*     struct Value* node = pop(&stack); */
-    /*     printf("Data: %f, Label: %s, Grad: %f\n", node->data, node->label, node->grad); */
-    /* } */
 
     /* Neuron test template **************************************************/
 
