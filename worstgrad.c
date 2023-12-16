@@ -529,7 +529,7 @@ forward_stack(struct Stack *stack, double h)
 }
 
 void
-grandent_descent(struct Stack *stack, double h, int n)
+grandient_descent(struct Stack *stack, double h, int n)
 {
     for (int i = 0; i < n; ++i)
     {
