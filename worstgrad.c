@@ -10,7 +10,10 @@ create_value(double data, const char *label)
 {
     struct Value val;
     val.data = data;
-    val.grad = 1.0; // Gradient of a value with respect to itself is 1 ?
+    //val.grad = 1.0; // Gradient of a value with respect to itself is 1 ?
+    // Answer: you fool, was causing a problem when called trough backward.
+    // The right value is 0.
+    val.grad = 0.0;
     snprintf(val.label, sizeof(val.label), "%s", label);  // Copy the label string.
 
     // Setting the operator to something is necessary for get_parents() .
@@ -91,7 +94,6 @@ struct Value
 w_tanh(struct Value *v, const char *label)
 {
     struct Value result = create_value((expm1(2 * v->data)) / (exp(2 * v->data) + 1), label);
-    result.grad = 0.0;
     snprintf(result.operator, sizeof(result.operator), "tanh");
     set_parent(&result, 0, v);
     return result;
@@ -141,14 +143,14 @@ w_pow(struct Value *v1, struct Value *v2, const char *label)
 void
 add_backward(struct Value *result)
 {
+    //print_node(result);
     if(result->parents[0] != NULL)
     {
-        // So maybe this line is unecessary.
-        result->parents[0]->grad = 1.0 * result->grad;
+        result->parents[0]->grad += result->grad;
     }
     if(result->parents[1] != NULL)
     {
-        result->parents[1]->grad += 1.0 * result->grad;
+        result->parents[1]->grad += result->grad;
     }
 }
 
@@ -157,7 +159,6 @@ sub_backward(struct Value *result)
 {
     if(result->parents[0] != NULL)
     {
-        // So maybe this line is unecessary.
         result->parents[0]->grad = 1.0 * result->grad;
     }
     if(result->parents[1] != NULL)
@@ -171,11 +172,12 @@ mul_backward(struct Value *result)
 {
     if(result->parents[0] != NULL)
     {
-        result->parents[0]->grad = result->parents[1]->data * result->grad;
+        //printf("%lf\n", result->parents[0]->grad);
+        result->parents[0]->grad += result->parents[1]->data * result->grad;
     }
     if(result->parents[1] != NULL)
     {
-        result->parents[1]->grad = result->parents[0]->data * result-> grad;
+        result->parents[1]->grad += result->parents[0]->data * result-> grad;
     }
 }
 
