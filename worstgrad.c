@@ -159,11 +159,11 @@ sub_backward(struct Value *result)
 {
     if(result->parents[0] != NULL)
     {
-        result->parents[0]->grad = 1.0 * result->grad;
+        result->parents[0]->grad -= result->grad;
     }
     if(result->parents[1] != NULL)
     {
-        result->parents[1]->grad = 1.0 * result->grad;
+        result->parents[1]->grad -= result->grad;
     }
 }
 
