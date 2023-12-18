@@ -51,9 +51,6 @@ struct Value w_relu(struct Value *v, const char *label);
 struct Value w_exp(struct Value *v, const char *label);
 struct Value w_pow(struct Value *v1, struct Value *v2, const char *label);
 
-void free_neuron(struct Neuron *neuron);
-struct Neuron *create_neuron(int n_weights);
-
 void get_parents(struct Value *v);
 struct Value *get_parents2(struct Value *v);
 void print_node(struct Value *v);
@@ -72,3 +69,7 @@ void init_stack(struct Stack *stack, int initial_capacity);
 void cleanup_stack(struct Stack *stack);
 void grandient_descent(struct Stack *stack, double h, int n);
 void print_stack(struct Stack *stack);
+
+void free_neuron(struct Neuron *neuron);
+struct Neuron *create_neuron(int n_weights);
+void init_neuron(struct Neuron *neuron, struct Value inputs[]);
