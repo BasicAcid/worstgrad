@@ -186,28 +186,9 @@ main(void)
 
     /* Layer test template   *******************************************/
 
-    struct Neuron *n1 = create_neuron(2);
-    struct Neuron *n2 = create_neuron(2);
-    struct Neuron *n3 = create_neuron(2);
+    struct Layer *layer_test = create_layer(3, 2);
 
-    struct Value in1 = create_value(2.0, "in1");
-    struct Value in2 = create_value(3.0, "in2");
-    struct Value in3 = create_value(5.0, "in2");
-    struct Value inputs[] = {in1, in2, in3};
-
-    init_neuron(n1, inputs);
-    init_neuron(n2, inputs);
-    init_neuron(n3, inputs);
-
-    free_neuron(n1);
-    free_neuron(n2);
-    free_neuron(n3);
-
-    //struct Layer *layer_test = create_layer(10, 10);
-
-    //free_layer(layer_test);
-
-    /* free_neuron(&layer_test->neurons[0]); */
+    free_layer(layer_test);
 
     /* init_layer(layer_test, inputs); */
 

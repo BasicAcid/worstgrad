@@ -23,7 +23,7 @@ struct Neuron
     struct Value bias;
     struct Value output;
     int n_inputs;
-    struct Value *weights; // Pointer to array
+    struct Value *weights;
 };
 
 struct Layer

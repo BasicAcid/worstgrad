@@ -79,20 +79,18 @@ struct Neuron *create_neuron(int n_weights)
 /*     return layer; */
 /* } */
 
-struct Layer *create_layer(int nin, int n_neurons)
+struct Layer *create_layer(int nin, int n_out)
 {
-    size_t layer_size = sizeof(struct Layer) + (long unsigned int)n_neurons * sizeof(struct Neuron);
+    size_t layer_size = sizeof(struct Layer) + (long unsigned int)n_out * sizeof(struct Neuron);
     struct Layer *layer = malloc(layer_size);
 
-    for (int i = 0; i < n_neurons; i++)
+    for (int i = 0; i < n_out; i++)
     {
         layer->neurons[i].weights = malloc((long unsigned int)layer->neurons[i].n_inputs * sizeof(struct Value));
-        // Additional initialization for neurons
-        // ...
     }
 
     layer->nin = nin;
-    layer->nout = n_neurons;
+    layer->nout = n_out;
 
     return layer;
 }
@@ -100,22 +98,21 @@ struct Layer *create_layer(int nin, int n_neurons)
 
 void free_layer(struct Layer *layer)
 {
-    if (layer == NULL)
+    if(layer == NULL)
     {
-        return; // Avoid dereferencing a null pointer
+        return;
     }
 
-    // Free each individual neuron in the layer.
-    for (int i = 0; i < layer->nout; i++)
+    for(int i = 0; i < layer->nin; i++)
     {
-        free_neuron(&layer->neurons[i]);
+        printf("%lf\n" , &layer->neurons[i].output.data);
+
+        //free_neuron(&layer->neurons[i]);
     }
 
-    // Free the neurons array.
-    free(layer->neurons);
+//    free(layer->neurons);
 
-    // Free the layer structure.
-    free(layer);
+//    free(layer);
 }
 
 
