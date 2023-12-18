@@ -167,6 +167,25 @@ main(void)
 
     /* Neuron test template **************************************************/
 
+    /* struct Neuron *n1 = create_neuron(2); */
+    /* struct Neuron *n2 = create_neuron(2); */
+    /* struct Neuron *n3 = create_neuron(2); */
+
+    /* struct Value in1 = create_value(2.0, "in1"); */
+    /* struct Value in2 = create_value(3.0, "in2"); */
+    /* struct Value in3 = create_value(5.0, "in2"); */
+    /* struct Value inputs[] = {in1, in2, in3}; */
+
+    /* init_neuron(n1, inputs); */
+    /* init_neuron(n2, inputs); */
+    /* init_neuron(n3, inputs); */
+
+    /* free_neuron(n1); */
+    /* free_neuron(n2); */
+    /* free_neuron(n3); */
+
+    /* Layer test template   *******************************************/
+
     struct Neuron *n1 = create_neuron(2);
     struct Neuron *n2 = create_neuron(2);
     struct Neuron *n3 = create_neuron(2);
@@ -184,17 +203,17 @@ main(void)
     free_neuron(n2);
     free_neuron(n3);
 
-    struct Layer *layer_test = create_layer(10, 10);
+    //struct Layer *layer_test = create_layer(10, 10);
 
-    free_layer(layer_test);
+    //free_layer(layer_test);
 
-    free_neuron(&layer_test->neurons[0]);
+    /* free_neuron(&layer_test->neurons[0]); */
 
-    init_layer(layer_test, inputs);
+    /* init_layer(layer_test, inputs); */
 
-    init_neuron(&layer_test->neurons[0], inputs);
-    init_neuron(&layer_test->neurons[1], inputs);
-    init_neuron(&layer_test->neurons[2], inputs);
+    /* init_neuron(&layer_test->neurons[0], inputs); */
+    /* init_neuron(&layer_test->neurons[1], inputs); */
+    /* init_neuron(&layer_test->neurons[2], inputs); */
 
     /* graphviz **************************************************************/
 
