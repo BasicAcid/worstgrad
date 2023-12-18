@@ -185,9 +185,9 @@ main(void)
 
     /* Layer test template   *******************************************/
 
-    struct Layer *layer_test = create_layer(3, 2);
+    /* struct Layer *layer_test = create_layer(3, 2); */
 
-    free_layer(layer_test);
+    /* free_layer(layer_test); */
 
     /* init_layer(layer_test, inputs); */
 

@@ -17,10 +17,10 @@ struct Neuron *create_neuron(int n_weights)
 
     neuron->n_inputs = n_weights;
 
-    // Set the pointer for the weights array
+    // Set the pointer for the weights array.
     neuron->weights = (struct Value *)((char *)neuron + sizeof(struct Neuron));
 
-    // Seed the random number generator with a combination of current time and a counter
+    // Seed the random number generator with a combination of current time and a counter.
     static unsigned int counter = 0;  // Static variable retains its value between calls
     srand48((long int)(time(NULL) + counter));
 
@@ -30,89 +30,17 @@ struct Neuron *create_neuron(int n_weights)
         neuron->weights[i].data = -1.0 + 2.0 * drand48();
     }
 
-    // Random bias between -1 and 1
+    // Random bias between -1 and 1.
     neuron->bias.data = -1.0 + 2.0 * drand48();
 
     neuron->n_inputs = n_weights;
 
     neuron->output.data = 0.0;
 
-    // Increment the counter for the next function call
+    // Increment the counter for the next function call.
     counter++;
 
     return neuron;
-}
-
-/* // (number of inputs per neuron, number of neurons) */
-/* struct Layer *create_layer(int nin, int n_neurons) */
-/* { */
-/*     // Calculate the total size of the structure, including the flexible array. */
-/*     struct Layer *layer = malloc(sizeof(struct Layer)); */
-/*     if (layer == NULL) { */
-/*         // Handle allocation failure */
-/*         return NULL; */
-/*     } */
-
-/*     layer->nin = nin; */
-/*     layer->nout = n_neurons; */
-
-/*     // Allocate memory for the neurons array. */
-/*     layer->neurons = malloc(n_neurons * sizeof(struct Neuron)); */
-/*     if (layer->neurons == NULL) { */
-/*         // Handle allocation failure */
-/*         free(layer); */
-/*         return NULL; */
-/*     } */
-
-/*     for (int i = 0; i < n_neurons; i++) */
-/*     { */
-/*         struct Neuron *new_neuron = create_neuron(nin); */
-/*         if (new_neuron == NULL) { */
-/*             // Handle create_neuron failure */
-/*             free(layer->neurons); */
-/*             free(layer); */
-/*             return NULL; */
-/*         } */
-/*         layer->neurons[i] = *new_neuron; */
-/*     } */
-
-/*     return layer; */
-/* } */
-
-struct Layer *create_layer(int nin, int n_out)
-{
-    size_t layer_size = sizeof(struct Layer) + (long unsigned int)n_out * sizeof(struct Neuron);
-    struct Layer *layer = malloc(layer_size);
-
-    for (int i = 0; i < n_out; i++)
-    {
-        layer->neurons[i].weights = malloc((long unsigned int)layer->neurons[i].n_inputs * sizeof(struct Value));
-    }
-
-    layer->nin = nin;
-    layer->nout = n_out;
-
-    return layer;
-}
-
-
-void free_layer(struct Layer *layer)
-{
-    if(layer == NULL)
-    {
-        return;
-    }
-
-    for(int i = 0; i < layer->nin; i++)
-    {
-        printf("%lf\n" , &layer->neurons[i].output.data);
-
-        //free_neuron(&layer->neurons[i]);
-    }
-
-//    free(layer->neurons);
-
-//    free(layer);
 }
 
 
@@ -132,15 +60,6 @@ void init_neuron(struct Neuron *neuron, struct Value inputs[])
     printf("Output: %f\n", neuron->output.data);
 }
 
-void init_layer(struct Layer *layer, struct Value inputs[])
-{
-    for(int i = 0; i < layer->nin; i++)
-    {
-        init_neuron(&layer->neurons[i], inputs);
-
-        //printf("neuneu: %f\n" , layer->neurons[i].weights[0].data);
-    }
-}
 
 void free_neuron(struct Neuron *neuron)
 {
