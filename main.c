@@ -10,10 +10,8 @@ main(void)
 
     /* struct Value a = create_value(-2, "a"); */
     /* struct Value b = create_value(3, "b"); */
-    /* struct Value d = w_mul(&a, &b, "d"); */
-    /* struct Value e = w_add(&a, &b, "e"); */
-    /* struct Value f = w_mul(&d, &e, "f"); */
-    /* struct Value g = w_tanh(&f, "g"); */
+    /* struct Value d = w_sub(&a, &b, "d"); */
+    /* struct Value g = w_tanh(&d, "g"); */
 
     /* g.grad = 1.0; */
 
@@ -25,93 +23,178 @@ main(void)
 
     /* dfs_to_stack(&g, &stack); */
 
-    /* double h = 0.001; */
+    /* //double h = 0.001; */
 
-    /* grandient_descent(&stack, h, 200); */
+    /* //grandient_descent(&stack, h, 200); */
+
+    /* backward_stack(&stack); */
 
     /* print_stack(&stack); */
 
     /* cleanup_stack(&stack); */
 
+    /* Backward problem template*************************************************/
+
+    /* struct Value a = create_value(-2, "a"); */
+    /* struct Value b = create_value(3, "b"); */
+    /* struct Value c = w_mul(&a, &b, "c"); */
+    /* struct Value g = w_tanh(&c, "g"); */
+    /* g.grad = 1.0; */
+
+    /* struct Stack stack; */
+
+    /* int initial_capacity = 100; */
+    /* init_stack(&stack, initial_capacity); */
+
+    /* dfs_to_stack(&g, &stack); */
+
+    /* backward_stack(&stack); */
+
+    /* print_stack(&stack); */
+    /* cleanup_stack(&stack); */
+
     /* Test template 2. ******************************************************/
 
-    struct Value x1 = create_value(2.0, "x1");
-    struct Value x2 = create_value(0.0, "x2");
-    struct Value w1 = create_value(-3.0, "w1");
-    struct Value w2 = create_value(1.0, "w2");
+    /* struct Value x1 = create_value(2.0, "x1"); */
+    /* struct Value x2 = create_value(0.0, "x2"); */
+    /* struct Value w1 = create_value(-3.0, "w1"); */
+    /* struct Value w2 = create_value(1.0, "w2"); */
+    /* struct Value b = create_value(6.8813735870195432, "b"); */
+    /* struct Value x1w1 = w_mul(&x1, &w1, "x1w1"); */
+    /* struct Value x2w2 = w_mul(&x2, &w2, "x2w2"); */
+    /* struct Value x1w1x2w2 = w_add(&x1w1, &x2w2, "x1*w1 + x2*w2"); */
+    /* struct Value n = w_add(&x1w1x2w2, &b, "n"); */
+    /* struct Value o = w_tanh(&n, "o"); */
 
-    struct Value b = create_value(6.8813735870195432, "b");
+    /* o.grad = 1.0; */
 
-    struct Value x1w1 = w_mul(&x1, &w1, "x1w1");
-    struct Value x2w2 = w_mul(&x2, &w2, "x2w2");
-    struct Value x1w1x2w2 = w_add(&x1w1, &x2w2, "x1*w1 + x2*w2");
+    /* struct Stack stack; */
 
-    struct Value n = w_add(&x1w1x2w2, &b, "n");
+    /* int initial_capacity = 100; */
+    /* init_stack(&stack, initial_capacity); */
 
-    // Intermediate values.
-    struct Value z = create_value(2.0, "z");
-    struct Value x = w_mul(&n, &z, "x");
+    /* dfs_to_stack(&o, &stack); */
 
-    /* e = (2*n).exp() */
-    struct Value e = w_exp(&x, "e");
+    /* backward_stack(&stack); */
 
-    // Intermediate values.
-    struct Value io1 = create_value(1.0, "io1");
-    struct Value io2 = create_value(1.0, "io2");
-    struct Value io3 = w_sub(&e, &io1, "io3");
-    struct Value io4 = w_add(&e, &io2, "io4");
+    /* print_stack(&stack); */
 
-    /* o = (e - 1) / (e + 1) */
-    struct Value o = w_div(&io3, &io4, "o");
+    /* cleanup_stack(&stack); */
 
-    o.grad = 1.0;
+    /* Test template 3. ******************************************************/
 
-    struct Stack stack;
+    /* struct Value x1 = create_value(2.0, "x1"); */
+    /* struct Value x2 = create_value(0.0, "x2"); */
+    /* struct Value w1 = create_value(-3.0, "w1"); */
+    /* struct Value w2 = create_value(1.0, "w2"); */
 
-    // Find a way to automate this.
-    int initial_capacity = 100;
-    init_stack(&stack, initial_capacity);
+    /* struct Value b = create_value(6.8813735870195432, "b"); */
 
-    dfs_to_stack(&o, &stack);
+    /* struct Value x1w1 = w_mul(&x1, &w1, "x1w1"); */
+    /* struct Value x2w2 = w_mul(&x2, &w2, "x2w2"); */
+    /* struct Value x1w1x2w2 = w_add(&x1w1, &x2w2, "x1*w1 + x2*w2"); */
 
-    double h = 0.001;
+    /* struct Value n = w_add(&x1w1x2w2, &b, "n"); */
 
-    grandient_descent(&stack, h, 100);
+    /* /\* // Intermediate values. *\/ */
+    /* struct Value z = create_value(2.0, "z"); */
+    /* struct Value x = w_mul(&n, &z, "x"); */
 
-    print_stack(&stack);
+    /* /\* /\\* e = (2*n).exp() *\\/ *\/ */
+    /* struct Value e = w_exp(&x, "e"); */
 
-    cleanup_stack(&stack);
+    /* e.grad = 1.0; */
+
+    /* struct Stack stack; */
+
+    /* int initial_capacity = 100; */
+    /* init_stack(&stack, initial_capacity); */
+
+    /* dfs_to_stack(&e, &stack); */
+
+    /* backward_stack(&stack); */
+
+    /* print_stack(&stack); */
+
+    /* cleanup_stack(&stack); */
+
+
+    /* Test template 4. ******************************************************/
+
+    /* struct Value x1 = create_value(2.0, "x1"); */
+    /* struct Value x2 = create_value(0.0, "x2"); */
+    /* struct Value w1 = create_value(-3.0, "w1"); */
+    /* struct Value w2 = create_value(1.0, "w2"); */
+
+    /* struct Value b = create_value(6.8813735870195432, "b"); */
+
+    /* struct Value x1w1 = w_mul(&x1, &w1, "x1w1"); */
+    /* struct Value x2w2 = w_mul(&x2, &w2, "x2w2"); */
+    /* struct Value x1w1x2w2 = w_add(&x1w1, &x2w2, "x1*w1 + x2*w2"); */
+
+    /* struct Value n = w_add(&x1w1x2w2, &b, "n"); */
+
+    /* /\* // Intermediate values. *\/ */
+    /* struct Value z = create_value(2.0, "z"); */
+    /* struct Value x = w_mul(&n, &z, "x"); */
+
+    /* /\* /\\* e = (2*n).exp() *\\/ *\/ */
+    /* struct Value e = w_exp(&x, "e"); */
+
+    /* /\* // Intermediate values. *\/ */
+    /* struct Value io1 = create_value(1.0, "io1"); */
+    /* // struct Value io2 = create_value(1.0, "io2"); */
+    /* struct Value io3 = w_add(&e, &io1, "io3"); */
+    /* // struct Value io4 = w_add(&e, &io2, "io4"); */
+
+    /* // o = (e - 1) / (e + 1) */
+    /* // struct Value o = w_div(&io3, &io4, "o"); */
+
+    /* io3.grad = 1.0; */
+
+    /* struct Stack stack; */
+
+    /* int initial_capacity = 100; */
+    /* init_stack(&stack, initial_capacity); */
+
+    /* dfs_to_stack(&io3, &stack); */
+
+    /* backward_stack(&stack); */
+
+    /* print_stack(&stack); */
+
+    /* cleanup_stack(&stack); */
 
     /* Neuron test template **************************************************/
 
-    /* struct Neuron *neuneu = create_neuron(2); */
-    /* struct Neuron *nana = create_neuron(2); */
-    /* struct Neuron *noutnout = create_neuron(2); */
+    struct Neuron *n1 = create_neuron(2);
+    struct Neuron *n2 = create_neuron(2);
+    struct Neuron *n3 = create_neuron(2);
 
-    /* struct Value in1 = create_value(2.0, "in1"); */
-    /* struct Value in2 = create_value(3.0, "in2"); */
-    /* struct Value in3 = create_value(5.0, "in2"); */
-    /* struct Value inputs[] = {in1, in2, in3}; */
+    struct Value in1 = create_value(2.0, "in1");
+    struct Value in2 = create_value(3.0, "in2");
+    struct Value in3 = create_value(5.0, "in2");
+    struct Value inputs[] = {in1, in2, in3};
 
-    /* init_neuron(neuneu, inputs); */
-    /* init_neuron(nana, inputs); */
-    /* init_neuron(noutnout, inputs); */
+    init_neuron(n1, inputs);
+    init_neuron(n2, inputs);
+    init_neuron(n3, inputs);
 
-    /* free_neuron(neuneu); */
-    /* free_neuron(nana); */
-    /* free_neuron(noutnout); */
+    free_neuron(n1);
+    free_neuron(n2);
+    free_neuron(n3);
 
-    //struct Layer *layer_test = create_layer(10, 10);
+    struct Layer *layer_test = create_layer(10, 10);
 
-    //free_layer(layer_test);
+    free_layer(layer_test);
 
-    //free_neuron(&layer_test->neurons[0]);
+    free_neuron(&layer_test->neurons[0]);
 
-    //init_layer(layer_test, inputs);
+    init_layer(layer_test, inputs);
 
-    //init_neuron(&layer_test->neurons[0], inputs);
-    //init_neuron(&layer_test->neurons[1], inputs);
-    //init_neuron(&layer_test->neurons[2], inputs);
+    init_neuron(&layer_test->neurons[0], inputs);
+    init_neuron(&layer_test->neurons[1], inputs);
+    init_neuron(&layer_test->neurons[2], inputs);
 
     /* graphviz **************************************************************/
 
