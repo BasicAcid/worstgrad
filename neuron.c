@@ -4,7 +4,8 @@
 #include "main.h"
 
 // Create a Neuron instance with a weights array of size 'n_weights'.
-struct Neuron *create_neuron(int n_weights)
+struct Neuron
+*create_neuron(int n_weights)
 {
     // Allocate memory for the entire structure, including the weights array.
     size_t neuron_size = sizeof(struct Neuron) + sizeof(struct Value) * (long unsigned int)n_weights;
@@ -21,6 +22,7 @@ struct Neuron *create_neuron(int n_weights)
     neuron->weights = (struct Value *)((char *)neuron + sizeof(struct Neuron));
 
     // Seed the random number generator with a combination of current time and a counter.
+    // This is pretty bad, either replace with somtheing simpler, or something better.
     static unsigned int counter = 0;  // Static variable retains its value between calls
     srand48((long int)(time(NULL) + counter));
 
@@ -44,7 +46,8 @@ struct Neuron *create_neuron(int n_weights)
 }
 
 
-void init_neuron(struct Neuron *neuron, struct Value inputs[])
+void
+init_neuron(struct Neuron *neuron, struct Value inputs[])
 {
     printf("Weights:\n");
 
@@ -60,7 +63,8 @@ void init_neuron(struct Neuron *neuron, struct Value inputs[])
     printf("Output: %f\n", neuron->output.data);
 }
 
-void free_neuron(struct Neuron *neuron)
+void
+free_neuron(struct Neuron *neuron)
 {
 
     // Free the memory allocated for the weights array.
@@ -69,4 +73,19 @@ void free_neuron(struct Neuron *neuron)
 
     // Free the memory allocated for the structure.
     free(neuron);
+}
+
+void
+print_neuron(struct Neuron *n)
+{
+    printf("Bias: %lf\n", n->bias.data);
+
+    printf("Output: %lf\n", n->output.data);
+
+    for(int i = 0; i < n->n_inputs; i++)
+    {
+        printf("Weight %d: %lf\n", i, n->weights[i].data);
+    }
+
+    //printf("Data: %f, Label: %s, Grad: %f, Op: %s, Vis: %d\n", v->data, v->label, v->grad, v->operator, v->visited);
 }

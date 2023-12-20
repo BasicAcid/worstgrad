@@ -196,12 +196,5 @@ main(void)
 
     free_layer(layer_test);
 
-
-
-    /* init_neuron(&layer_test->neurons[0], inputs); */
-    /* init_neuron(&layer_test->neurons[1], inputs); */
-    /* init_neuron(&layer_test->neurons[2], inputs); */
-
-
     return 0;
 }
