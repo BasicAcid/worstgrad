@@ -3,7 +3,7 @@
 #include <time.h>
 #include "main.h"
 
-// Create a Neuron instance with a weights array of size 'num_weights'
+// Create a Neuron instance with a weights array of size 'n_weights'.
 struct Neuron *create_neuron(int n_weights)
 {
     // Allocate memory for the entire structure, including the weights array.
@@ -60,12 +60,13 @@ void init_neuron(struct Neuron *neuron, struct Value inputs[])
     printf("Output: %f\n", neuron->output.data);
 }
 
-
 void free_neuron(struct Neuron *neuron)
 {
-    // Free the memory allocated for the weights array
+
+    // Free the memory allocated for the weights array.
+    // Necessary?
     //free(neuron->weights);
 
-    // Free the memory allocated for the structure
+    // Free the memory allocated for the structure.
     free(neuron);
 }

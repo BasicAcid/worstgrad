@@ -43,10 +43,14 @@ struct Layer *create_layer(int nin, int n_out)
     size_t layer_size = sizeof(struct Layer) + (long unsigned int)n_out * sizeof(struct Neuron);
     struct Layer *layer = malloc(layer_size);
 
-    for (int i = 0; i < n_out; i++)
-    {
-        layer->neurons[i].weights = malloc((long unsigned int)layer->neurons[i].n_inputs * sizeof(struct Value));
-    }
+    /* for (int i = 0; i < n_out; i++) */
+    /* { */
+    /*     /\* size_t weights = malloc((long unsigned int)layer->neurons[i].n_inputs * sizeof(struct Value)); *\/ */
+    /*     /\* layer->neurons[i].weights = weights; *\/ */
+
+    /*     //init_neuron(create_neuron(n_out), nin); */
+
+    /* } */
 
     layer->nin = nin;
     layer->nout = n_out;
@@ -62,24 +66,24 @@ void free_layer(struct Layer *layer)
         return;
     }
 
-    for(int i = 0; i < layer->nin; i++)
-    {
-        //printf("%lf\n" , &layer->neurons[i].output.data);
+    /* for(int i = 0; i < layer->nout; i++) */
+    /* { */
+    /*     printf("%lf\n" , &layer->neurons[i].output.data); */
 
-        //free_neuron(&layer->neurons[i]);
-    }
+    /*     //free_neuron(&layer->neurons[i]); */
+    /* } */
 
-//    free(layer->neurons);
+    //free(layer->neurons);
 
-//    free(layer);
+    free(layer);
 }
 
-void init_layer(struct Layer *layer, struct Value inputs[])
-{
-    for(int i = 0; i < layer->nin; i++)
-    {
-        init_neuron(&layer->neurons[i], inputs);
+/* void init_layer(struct Layer *layer, struct Value inputs[]) */
+/* { */
+/*     for(int i = 0; i < layer->nin; i++) */
+/*     { */
+/*         init_neuron(&layer->neurons[i], inputs); */
 
-        //printf("neuneu: %f\n" , layer->neurons[i].weights[0].data);
-    }
-}
+/*         //printf("neuneu: %f\n" , layer->neurons[i].weights[0].data); */
+/*     } */
+/* } */
