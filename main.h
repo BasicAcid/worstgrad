@@ -73,5 +73,7 @@ void print_stack(struct Stack *stack);
 void free_neuron(struct Neuron *neuron);
 struct Neuron *create_neuron(int n_weights);
 void init_neuron(struct Neuron *neuron, struct Value inputs[]);
+void print_neuron(struct Neuron *n);
+
 struct Layer *create_layer(int nin, int n_neurons);
 void free_layer(struct Layer *layer);

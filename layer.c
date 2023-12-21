@@ -2,47 +2,15 @@
 #include <stdlib.h>
 #include "main.h"
 
-/* // (number of inputs per neuron, number of neurons) */
-/* struct Layer *create_layer(int nin, int n_neurons) */
-/* { */
-/*     // Calculate the total size of the structure, including the flexible array. */
-/*     struct Layer *layer = malloc(sizeof(struct Layer)); */
-/*     if (layer == NULL) { */
-/*         // Handle allocation failure */
-/*         return NULL; */
-/*     } */
-
-/*     layer->nin = nin; */
-/*     layer->nout = n_neurons; */
-
-/*     // Allocate memory for the neurons array. */
-/*     layer->neurons = malloc(n_neurons * sizeof(struct Neuron)); */
-/*     if (layer->neurons == NULL) { */
-/*         // Handle allocation failure */
-/*         free(layer); */
-/*         return NULL; */
-/*     } */
-
-/*     for (int i = 0; i < n_neurons; i++) */
-/*     { */
-/*         struct Neuron *new_neuron = create_neuron(nin); */
-/*         if (new_neuron == NULL) { */
-/*             // Handle create_neuron failure */
-/*             free(layer->neurons); */
-/*             free(layer); */
-/*             return NULL; */
-/*         } */
-/*         layer->neurons[i] = *new_neuron; */
-/*     } */
-
-/*     return layer; */
-/* } */
 
 struct Layer
 *create_layer(int nin, int n_out)
 {
     size_t layer_size = sizeof(struct Layer) + (long unsigned int)n_out * sizeof(struct Neuron);
     struct Layer *layer = malloc(layer_size);
+
+    //layer->neurons = calloc((size_t)layer->nout, sizeof(struct Neuron));
+
 
     for (int i = 0; i < n_out; i++)
     {
@@ -62,6 +30,7 @@ struct Layer
 }
 
 
+
 void
 free_layer(struct Layer *layer)
 {
@@ -72,7 +41,6 @@ free_layer(struct Layer *layer)
 
     for(int i = 0; i < layer->nout; i++)
     {
-        //printf("%lf\n" , &layer->neurons[i].output.data);
         print_neuron(&layer->neurons[i]);
 
         //free_neuron(&layer->neurons[i]);
@@ -82,13 +50,3 @@ free_layer(struct Layer *layer)
 
     free(layer);
 }
-
-/* void init_layer(struct Layer *layer, struct Value inputs[]) */
-/* { */
-/*     for(int i = 0; i < layer->nin; i++) */
-/*     { */
-/*         init_neuron(&layer->neurons[i], inputs); */
-
-/*         //printf("neuneu: %f\n" , layer->neurons[i].weights[0].data); */
-/*     } */
-/* } */

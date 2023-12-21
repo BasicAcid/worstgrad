@@ -66,12 +66,6 @@ init_neuron(struct Neuron *neuron, struct Value inputs[])
 void
 free_neuron(struct Neuron *neuron)
 {
-
-    // Free the memory allocated for the weights array.
-    // Necessary?
-    //free(neuron->weights);
-
-    // Free the memory allocated for the structure.
     free(neuron);
 }
 
@@ -86,6 +80,4 @@ print_neuron(struct Neuron *n)
     {
         printf("Weight %d: %lf\n", i, n->weights[i].data);
     }
-
-    //printf("Data: %f, Label: %s, Grad: %f, Op: %s, Vis: %d\n", v->data, v->label, v->grad, v->operator, v->visited);
 }
