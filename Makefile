@@ -35,7 +35,7 @@ tags:
 	etags main.c worstgrad.c neuron.c layer.c main.h
 
 clean:
-	rm -rf $(BIN_DIR)/*.o $(TARGET) $(DEBUG_TARGET)
+	rm -rf *.o $(BIN_DIR)/*.o $(TARGET) $(DEBUG_TARGET)
 
 cppcheck:
 	cppcheck --enable=all --inconclusive --force .
