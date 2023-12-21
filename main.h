@@ -77,3 +77,4 @@ void print_neuron(struct Neuron *n);
 
 struct Layer *create_layer(int nin, int n_neurons);
 void free_layer(struct Layer *layer);
+void forward_layer(struct Layer *layer, struct Value inputs[]);

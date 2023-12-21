@@ -53,14 +53,14 @@ init_neuron(struct Neuron *neuron, struct Value inputs[])
 
     for(int i = 0; i < neuron->n_inputs; i++)
     {
-        printf("%f\n", neuron->weights[i].data);
+        //printf("%f\n", neuron->weights[i].data);
         neuron->output.data = (neuron->weights[i].data * inputs[i].data) + neuron->bias.data;
     }
 
     neuron->output = w_tanh(&neuron->output, "output");
 
-    printf("Bias: %f\n", neuron->bias.data);
-    printf("Output: %f\n", neuron->output.data);
+    //printf("Bias: %f\n", neuron->bias.data);
+    //printf("Output: %f\n", neuron->output.data);
 }
 
 void

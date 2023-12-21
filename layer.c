@@ -9,10 +9,7 @@ struct Layer
     size_t layer_size = sizeof(struct Layer) + (long unsigned int)n_out * sizeof(struct Neuron);
     struct Layer *layer = malloc(layer_size);
 
-    //layer->neurons = calloc((size_t)layer->nout, sizeof(struct Neuron));
-
-
-    for (int i = 0; i < n_out; i++)
+    for(int i = 0; i < n_out; i++)
     {
         /* size_t weights = malloc((long unsigned int)layer->neurons[i].n_inputs * sizeof(struct Value)); */
         /* layer->neurons[i].weights = weights; */
@@ -29,7 +26,19 @@ struct Layer
     return layer;
 }
 
+void
+forward_layer(struct Layer *layer, struct Value inputs[])
+{
+    if(layer == NULL)
+    {
+        return;
+    }
 
+    for(int i = 0; i < layer->nout; i++)
+    {
+        init_neuron(&layer->neurons[i], inputs);
+    }
+}
 
 void
 free_layer(struct Layer *layer)

@@ -185,14 +185,13 @@ main(void)
 
     /* Layer test template   *******************************************/
 
-    struct Layer *layer_test = create_layer(3, 2);
+    struct Layer *layer_test = create_layer(2, 3);
 
     struct Value in1 = create_value(2.0, "in1");
     struct Value in2 = create_value(3.0, "in2");
-    struct Value in3 = create_value(5.0, "in2");
-    struct Value inputs[] = {in1, in2, in3};
+    struct Value inputs[] = {in1, in2};
 
-    //init_layer(layer_test, inputs);
+    forward_layer(layer_test, inputs);
 
     free_layer(layer_test);
 
