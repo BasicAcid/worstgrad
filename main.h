@@ -33,12 +33,12 @@ struct Layer
     struct Neuron neurons[];
 };
 
-/* struct Layer */
-/* { */
-/*     int nin; */
-/*     int nout; */
-/*     struct Neuron *neurons; */
-/* }; */
+struct MLP
+{
+    int nin;
+    int nouts[];
+    struct Layer layers[];
+};
 
 struct Value create_value(double data, const char *label);
 
@@ -56,12 +56,9 @@ struct Value *get_parents2(struct Value *v);
 void print_node(struct Value *v);
 
 void backward(struct Value *result);
-//void backward_stack(struct Value *top_node, struct Stack *stack);
 void backward_stack(struct Stack *stack);
 void forward_stack(struct Stack *stack, double h);
 void dfs_to_stack(struct Value *node, struct Stack *stack);
-/* void backward_stack2(struct Value *top_node, struct Stack2 *stack); */
-/* void dfs_to_stack2(struct Value *node, struct Stack2 *stack); */
 struct Value *pop(struct Stack *stack);
 void push(struct Stack *stack, struct Value *newValue);
 struct Value *peek(struct Stack *stack);

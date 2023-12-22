@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Wformat=2 -Wformat-overflow -Wformat-truncation -Wshadow
 DEBUG_FLAGS = -O0 -DDEBUG
 LIBS = -lm
 
-SRCS = main.c worstgrad.c neuron.c layer.c
+SRCS = main.c worstgrad.c neuron.c layer.c mlp.c
 OBJS = $(SRCS:.c=.o)
 
 BIN_DIR = ./bin

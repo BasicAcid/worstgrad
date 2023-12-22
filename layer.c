@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "main.h"
 
-
 struct Layer
 *create_layer(int nin, int n_out)
 {
