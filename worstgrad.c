@@ -143,55 +143,42 @@ w_pow(struct Value *v1, struct Value *v2, const char *label)
 void
 add_backward(struct Value *result)
 {
-    //print_node(result);
     if(result->parents[0] != NULL)
-    {
         result->parents[0]->grad += result->grad;
-    }
+
     if(result->parents[1] != NULL)
-    {
         result->parents[1]->grad += result->grad;
-    }
 }
 
 void
 sub_backward(struct Value *result)
 {
     if(result->parents[0] != NULL)
-    {
         result->parents[0]->grad -= result->grad;
-    }
+
     if(result->parents[1] != NULL)
-    {
         result->parents[1]->grad -= result->grad;
-    }
 }
 
 void
 mul_backward(struct Value *result)
 {
     if(result->parents[0] != NULL)
-    {
         //printf("%lf\n", result->parents[0]->grad);
         result->parents[0]->grad += result->parents[1]->data * result->grad;
-    }
+
     if(result->parents[1] != NULL)
-    {
         result->parents[1]->grad += result->parents[0]->data * result-> grad;
-    }
 }
 
 void
 div_backward(struct Value *result)
 {
     if(result->parents[0] != NULL)
-    {
         result->parents[0]->grad = 1 / result->parents[1]->data;
-    }
+
     if(result->parents[1] != NULL)
-    {
         result->parents[1]->grad = result->parents[0]->data / pow(result->parents[1]->data, 2);
-    }
 }
 
 void
@@ -204,9 +191,7 @@ void
 exp_backward(struct Value *result)
 {
     if(result->parents[0] != NULL)
-    {
         result->parents[0]->grad = result->grad * result->data;
-    }
 }
 
 void
@@ -233,37 +218,21 @@ void
 backward(struct Value *result)
 {
     if(strcmp(result->operator, "+") == 0)
-    {
         add_backward(result);
-    }
     else if(strcmp(result->operator, "-") == 0)
-    {
         sub_backward(result);
-    }
     else if(strcmp(result->operator, "*") == 0)
-    {
         mul_backward(result);
-    }
     else if(strcmp(result->operator, "/") == 0)
-    {
         div_backward(result);
-    }
     else if(strcmp(result->operator, "tanh") == 0)
-    {
         tanh_backward(result);
-    }
     else if(strcmp(result->operator, "exp") == 0)
-    {
         exp_backward(result);
-    }
     else if(strcmp(result->operator, "pow") == 0)
-    {
         pow_backward(result);
-    }
     else if(strcmp(result->operator, "relu") == 0)
-    {
         relu_backward(result);
-    }
 }
 
 void

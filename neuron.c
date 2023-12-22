@@ -12,9 +12,7 @@ struct Neuron
     struct Neuron *neuron = malloc(neuron_size);
 
     if (neuron == NULL)
-    {
         return NULL;
-    }
 
     neuron->n_inputs = n_weights;
 
@@ -49,8 +47,6 @@ struct Neuron
 void
 init_neuron(struct Neuron *neuron, struct Value inputs[])
 {
-    printf("Weights:\n");
-
     for(int i = 0; i < neuron->n_inputs; i++)
     {
         neuron->output.data = (neuron->weights[i].data * inputs[i].data) + neuron->bias.data;

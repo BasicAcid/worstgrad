@@ -29,9 +29,7 @@ void
 forward_layer(struct Layer *layer, struct Value inputs[])
 {
     if(layer == NULL)
-    {
         return;
-    }
 
     for(int i = 0; i < layer->nout; i++)
     {
@@ -43,9 +41,7 @@ void
 free_layer(struct Layer *layer)
 {
     if(layer == NULL)
-    {
         return;
-    }
 
     for(int i = 0; i < layer->nout; i++)
     {

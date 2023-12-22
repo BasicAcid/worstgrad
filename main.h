@@ -36,7 +36,7 @@ struct Layer
 struct MLP
 {
     int nin;
-    int nouts[];
+    //int nouts[];
     struct Layer layers[];
 };
 
