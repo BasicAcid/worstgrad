@@ -99,16 +99,21 @@ w_tanh(struct Value *v, const char *label)
     return result;
 }
 
-struct Value w_relu(struct Value *v, const char *label)
+struct Value
+w_relu(struct Value *v, const char *label)
 {
     struct Value result;
-    result.data = (v->data < 0) ? 0 : v->data;
+
+    if(v->data < 0)
+        result = create_value(0, label);
+    else
+        result = create_value(v->data, label);
+
     result.grad = 0.0;
     snprintf(result.operator, sizeof(result.operator), "relu");
     set_parent(&result, 0, v);
     return result;
 }
-
 
 struct Value
 w_exp(struct Value *v, const char *label)
@@ -197,13 +202,9 @@ void
 relu_backward(struct Value *result)
 {
     if(result->data > 0)
-    {
         result->parents[0]->grad = result->data * result->grad;
-    }
     else
-    {
         result->parents[0]->grad = result->grad;
-    }
 }
 
 void
