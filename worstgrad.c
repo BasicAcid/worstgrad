@@ -229,69 +229,37 @@ backward(struct Value *result)
 }
 
 void
-get_parents(struct Value *v)
-{
-    if(strcmp("+", v->operator) == 0)
+get_parents(struct Value *v) {
+    int numParents = 0;
+
+    if(strcmp("+", v->operator) == 0 ||
+       strcmp("-", v->operator) == 0 ||
+       strcmp("*", v->operator) == 0 ||
+       strcmp("/", v->operator) == 0 ||
+       strcmp("pow", v->operator) == 0)
     {
-        for(int i = 0; i < 2; i++)
-        {
-            printf("Parent data: %lf\n", v->parents[i]->data);
-        }
+        numParents = 2;
     }
-    else if(strcmp("-", v->operator) == 0)
+    else if(strcmp("tanh", v->operator) == 0 ||
+            strcmp("relu", v->operator) == 0 ||
+            strcmp("exp", v->operator) == 0)
     {
-        for(int i = 0; i < 2; i++)
-        {
-            printf("Parent data: %lf\n", v->parents[i]->data);
-        }
+        numParents = 1;
     }
-    else if(strcmp("*", v->operator) == 0)
+
+    if(numParents > 0)
     {
-        for(int i = 0; i < 2; i++)
-        {
-            printf("Parent data: %lf\n", v->parents[i]->data);
-        }
-    }
-    else if(strcmp("/", v->operator) == 0)
-    {
-        for(int i = 0; i < 2; i++)
-        {
-            printf("Parent data: %lf\n", v->parents[i]->data);
-        }
-    }
-    else if(strcmp("tanh", v->operator) == 0)
-    {
-        for(int i = 0; i < 1; i++)
-        {
-            printf("Parent data: %lf\n", v->parents[i]->data);
-        }
-    }
-    else if(strcmp("relu", v->operator) == 0)
-    {
-        for(int i = 0; i < 1; i++)
-        {
-            printf("Parent data: %lf\n", v->parents[i]->data);
-        }
-    }
-    else if(strcmp("exp", v->operator) == 0)
-    {
-        for(int i = 0; i < 1; i++)
-        {
-            printf("Parent data: %lf\n", v->parents[i]->data);
-        }
-    }
-    else if(strcmp("pow", v->operator) == 0)
-    {
-        for(int i = 0; i < 2; i++)
+        for(int i = 0; i < numParents; i++)
         {
             printf("Parent data: %lf\n", v->parents[i]->data);
         }
     }
     else
     {
-        printf("Root node.");
+        printf("Root node.\n");
     }
 }
+
 
 // Any use?
 struct Value
