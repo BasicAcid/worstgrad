@@ -52,7 +52,8 @@ init_neuron(struct Neuron *neuron, struct Value inputs[])
         neuron->output.data = (neuron->weights[i].data * inputs[i].data) + neuron->bias.data;
     }
 
-    neuron->output = w_tanh(&neuron->output, "output");
+    //neuron->output = w_tanh(&neuron->output, "output");
+    neuron->output = w_relu(&neuron->output, "output");
 }
 
 void
