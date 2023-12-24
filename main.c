@@ -185,15 +185,22 @@ main(void)
 
     /* Layer test template   *******************************************/
 
-    struct Layer *layer_test = create_layer(2, 3);
+    /* struct Layer *layer_test = create_layer(2, 3); */
 
-    struct Value in1 = create_value(2.0, "in1");
-    struct Value in2 = create_value(3.0, "in2");
-    struct Value inputs[] = {in1, in2};
+    /* struct Value in1 = create_value(2.0, "in1"); */
+    /* struct Value in2 = create_value(3.0, "in2"); */
+    /* struct Value inputs[] = {in1, in2}; */
 
-    forward_layer(layer_test, inputs);
+    /* forward_layer(layer_test, inputs); */
 
-    free_layer(layer_test);
+    /* free_layer(layer_test); */
+
+    /* MLP test template *********************************************************/
+
+    int n_layers = 5;
+    struct MLP my_mlp = create_mlp(10, n_layers);
+
+    destroy_mlp(&my_mlp);
 
     return 0;
 }

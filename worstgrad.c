@@ -115,6 +115,14 @@ w_relu(struct Value *v, const char *label)
     return result;
 }
 
+/* // Set to a proper return type after implementation. */
+/* //struct Value */
+/* void */
+/* softmax(struct Value *v, int arr_size) */
+/* { */
+
+/* } */
+
 struct Value
 w_exp(struct Value *v, const char *label)
 {

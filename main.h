@@ -36,8 +36,8 @@ struct Layer
 struct MLP
 {
     int nin;
-    //int nouts[];
-    struct Layer layers[];
+    int *nouts;
+    struct Layer *layers;
 };
 
 struct Value create_value(double data, const char *label);
@@ -75,3 +75,6 @@ void print_neuron(struct Neuron *n);
 struct Layer *create_layer(int nin, int n_neurons);
 void free_layer(struct Layer *layer);
 void forward_layer(struct Layer *layer, struct Value inputs[]);
+
+struct MLP create_mlp(int nin, int numLayers);
+void destroy_mlp(struct MLP *mlp);
