@@ -15,15 +15,14 @@
 /*     return mlp; */
 /* } */
 
-
 struct MLP
-create_mlp(int nin, int numLayers)
+create_mlp(int nin, int n_layers)
 {
     struct MLP mlp;
     mlp.nin = nin;
 
-    mlp.nouts = (int *)malloc((long unsigned int)numLayers * sizeof(int));
-    mlp.layers = (struct Layer *)malloc((long unsigned int)numLayers * sizeof(struct Layer));
+    mlp.nouts = (int *)malloc((long unsigned int)n_layers * sizeof(int));
+    mlp.layers = (struct Layer *)malloc((long unsigned int)n_layers * sizeof(struct Layer));
 
     return mlp;
 }
