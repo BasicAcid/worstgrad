@@ -380,32 +380,31 @@ print_graph(struct Value *head)
 void
 init_stack(struct Stack *stack, int initial_capacity)
 {
-    stack->items = (struct Value **)malloc(
-        (long unsigned int)initial_capacity * sizeof(struct Value *));
+    size_t items_size = (long unsigned int)initial_capacity * sizeof(struct Value *);
+    stack->items = (struct Value **)malloc(items_size);
     stack->top = -1;
     stack->capacity = initial_capacity;
 }
 
 void
-push(struct Stack *stack, struct Value *newValue)
+push(struct Stack *stack, struct Value *new_value)
 {
     if(stack->top == stack->capacity - 1)
     {
         stack->capacity = stack->capacity * 2; // Growth (too much?)
-        stack->items = (struct Value **)realloc(stack->items, (long unsigned int)stack->capacity * sizeof(struct Value *));
+        size_t items_size = (long unsigned int)stack->capacity * sizeof(struct Value *);
+        stack->items = (struct Value **)realloc(stack->items, items_size);
     }
 
     stack->top++;
-    stack->items[stack->top] = newValue;
+    stack->items[stack->top] = new_value;
 }
 
 struct Value
 *pop(struct Stack *stack)
 {
     if(stack->top == -1)
-    {
         return NULL;
-    }
 
     struct Value *popped = stack->items[stack->top];
     stack->top--;
@@ -417,12 +416,9 @@ struct Value
 *peek(struct Stack *stack)
 {
     if(stack->top == -1)
-    {
         return NULL;
-    }
 
     struct Value *peeked = stack->items[stack->top];
-
     return peeked;
 }
 
