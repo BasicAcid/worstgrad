@@ -1,5 +1,19 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Wformat=2 -Wformat-overflow -Wformat-truncation -Wshadow -Wdouble-promotion -Wundef -fno-common -z noexecstack -Wconversion -fsanitize=undefined -g
+
+CFLAGS := -Wall \
+          -Wextra \
+          -Wformat=2 \
+          -Wformat-overflow \
+          -Wformat-truncation \
+          -Wshadow \
+          -Wdouble-promotion \
+          -Wundef \
+          -fno-common \
+          -z noexecstack \
+          -Wconversion \
+          -fsanitize=undefined \
+          -g
+
 DEBUG_FLAGS = -O0 -DDEBUG
 LIBS = -lm
 
