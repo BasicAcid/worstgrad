@@ -52,7 +52,7 @@ clean:
 	rm -rf *.o $(BIN_DIR)/*.o $(TARGET) $(DEBUG_TARGET)
 
 cppcheck:
-	cppcheck --enable=all --inconclusive --force .
+	cppcheck --enable=all --inconclusive --force --suppress=unusedFunction .
 
 valgrind:
 	 valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 -s --track-fds=yes  --track-origins=yes ./bin/main
