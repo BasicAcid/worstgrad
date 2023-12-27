@@ -17,6 +17,24 @@ create_mlp(int nin, int n_layers)
     return mlp;
 }
 
+void forward_mlp(struct MLP *mlp, struct Value inputs[])
+{
+    if(mlp == NULL)
+        return;
+
+    int n = sizeof(inputs)/sizeof(inputs[0]);
+
+    printf("%d\n",  sizeof(inputs[0]));
+    //printf("%d\n", n);
+    printf("%lf\n", inputs[1].data);
+
+    for(int i = 0; i < n; i++)
+    {
+        //create_layer();
+        printf("qlskdj");
+    }
+}
+
 void
 destroy_mlp(struct MLP *mlp)
 {

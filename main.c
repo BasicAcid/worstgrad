@@ -175,9 +175,9 @@ main(void)
     /* struct Value in3 = create_value(5.0, "in2"); */
     /* struct Value inputs[] = {in1, in2, in3}; */
 
-    /* init_neuron(n1, inputs); */
-    /* init_neuron(n2, inputs); */
-    /* init_neuron(n3, inputs); */
+    /* forward_neuron(n1, inputs); */
+    /* forward_neuron(n2, inputs); */
+    /* forward_neuron(n3, inputs); */
 
     /* free_neuron(n1); */
     /* free_neuron(n2); */
@@ -185,22 +185,28 @@ main(void)
 
     /* Layer test template   *******************************************/
 
-    /* struct Layer *layer_test = create_layer(2, 3); */
+    struct Layer *layer_test = create_layer(2, 3);
+
+    struct Value in1 = create_value(2.0, "in1");
+    struct Value in2 = create_value(3.0, "in2");
+    struct Value inputs[] = {in1, in2};
+
+    forward_layer(layer_test, inputs);
+
+    free_layer(layer_test);
+
+    /* MLP test template *********************************************************/
+
+    /* int n_layers = 5; */
+    /* struct MLP my_mlp = create_mlp(10, n_layers); */
 
     /* struct Value in1 = create_value(2.0, "in1"); */
     /* struct Value in2 = create_value(3.0, "in2"); */
     /* struct Value inputs[] = {in1, in2}; */
 
-    /* forward_layer(layer_test, inputs); */
+    /* forward_mlp(&my_mlp, inputs); */
 
-    /* free_layer(layer_test); */
-
-    /* MLP test template *********************************************************/
-
-    int n_layers = 5;
-    struct MLP my_mlp = create_mlp(10, n_layers);
-
-    destroy_mlp(&my_mlp);
+    /* destroy_mlp(&my_mlp); */
 
     return 0;
 }

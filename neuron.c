@@ -2,27 +2,32 @@
 #include <stdlib.h>
 #include <time.h>
 #include "main.h"
+#include <sys/time.h>
 
-// Create a Neuron instance with a weights array of size 'n_weights'.
-struct Neuron
-*create_neuron(int n_weights)
+struct Neuron *create_neuron(int n_weights)
 {
-    // Allocate memory for the entire structure, including the weights array.
     size_t neuron_size = sizeof(struct Neuron) + sizeof(struct Value) * (long unsigned int)n_weights;
+
     struct Neuron *neuron = malloc(neuron_size);
 
     if (neuron == NULL)
-        return NULL;
+    {
+        fprintf(stderr, "Error (create_neuron): Unable to allocate memory.\n");
+        exit(EXIT_FAILURE);
+    }
 
     neuron->n_inputs = n_weights;
 
     // Set the pointer for the weights array.
     neuron->weights = (struct Value *)((char *)neuron + sizeof(struct Neuron));
 
-    // Seed the random number generator with a combination of current time and a counter.
-    // This is pretty bad, either replace with somtheing simpler, or something better.
-    static unsigned int counter = 0;  // Static variable retains its value between calls
-    srand48((long int)(time(NULL) + counter));
+    struct timeval currentTime;
+    gettimeofday(&currentTime, NULL);
+
+    // Combine seconds and microseconds, seems to be a good practice to do this.
+    // Required here? Probably not.
+    long int seed = currentTime.tv_sec * 1000 + currentTime.tv_usec / 1000;
+    srand48(seed);
 
     for (int i = 0; i < n_weights; i++)
     {
@@ -37,15 +42,12 @@ struct Neuron
 
     neuron->output.data = 0.0;
 
-    // Increment the counter for the next function call.
-    counter++;
-
     return neuron;
 }
 
 
 void
-init_neuron(struct Neuron *neuron, struct Value inputs[])
+forward_neuron(struct Neuron *neuron, struct Value inputs[])
 {
     for(int i = 0; i < neuron->n_inputs; i++)
     {

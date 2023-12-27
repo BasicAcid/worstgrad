@@ -1,6 +1,6 @@
 #include <stdbool.h>
 
-int max_parents = 2;
+enum { max_parents = 2 };
 
 struct Value
 {
@@ -8,7 +8,7 @@ struct Value
     double grad;
     char label[30];
     char operator[10];
-    struct Valu *parents[max_parents];
+    struct Value *parents[max_parents];
     void (*backward)(struct Value*);
     bool visited; // For topological sort.
 };
