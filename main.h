@@ -62,7 +62,7 @@ void backward_stack(struct Stack *stack);
 void forward_stack(struct Stack *stack, double h);
 void dfs_to_stack(struct Value *node, struct Stack *stack);
 struct Value *pop(struct Stack *stack);
-void push(struct Stack *stack, struct Value *newValue);
+void push(struct Stack *stack, struct Value *new_value);
 struct Value *peek(struct Stack *stack);
 void init_stack(struct Stack *stack, int initial_capacity);
 void cleanup_stack(struct Stack *stack);
@@ -74,10 +74,10 @@ struct Neuron *create_neuron(int n_weights);
 void forward_neuron(struct Neuron *neuron, struct Value inputs[]);
 void print_neuron(struct Neuron *n);
 
-struct Layer *create_layer(int nin, int n_neurons);
+struct Layer *create_layer(int nin, int n_out);
 void free_layer(struct Layer *layer);
 void forward_layer(struct Layer *layer, struct Value inputs[]);
 
-struct MLP create_mlp(int nin, int numLayers);
+struct MLP create_mlp(int nin, int n_layers);
 void forward_mlp(struct MLP *mlp, struct Value inputs[]);
 void destroy_mlp(struct MLP *mlp);

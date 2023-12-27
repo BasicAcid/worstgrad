@@ -22,17 +22,17 @@ void forward_mlp(struct MLP *mlp, struct Value inputs[])
     if(mlp == NULL)
         return;
 
-    int n = sizeof(inputs)/sizeof(inputs[0]);
+    // From cppcheck:
+    // mlp.c:25:13: warning: Using 'sizeof' on array given as function argument returns size of a pointer. [sizeofwithsilentarraypointer]
+    // int n = sizeof(inputs)/sizeof(inputs[0]);
 
-    printf("%d\n",  sizeof(inputs[0]));
     //printf("%d\n", n);
-    printf("%lf\n", inputs[1].data);
+    //printf("%lf\n", inputs[1].data);
 
-    for(int i = 0; i < n; i++)
-    {
-        //create_layer();
-        printf("qlskdj");
-    }
+    /* for(int i = 0; i < n; i++) */
+    /* { */
+    /*     //create_layer(); */
+    /* } */
 }
 
 void
