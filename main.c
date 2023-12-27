@@ -193,6 +193,8 @@ main(void)
 
     forward_layer(layer_test, inputs);
 
+    //free_neuron(&layer_test->neurons[0]);
+
     free_layer(layer_test);
 
     /* MLP test template *********************************************************/
