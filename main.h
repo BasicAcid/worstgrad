@@ -1,12 +1,14 @@
 #include <stdbool.h>
 
+int max_parents = 2;
+
 struct Value
 {
     double data;
     double grad;
     char label[30];
     char operator[10];
-    struct Value *parents[2]; // Magic number!
+    struct Valu *parents[max_parents];
     void (*backward)(struct Value*);
     bool visited; // For topological sort.
 };
@@ -69,7 +71,7 @@ void print_stack(struct Stack *stack);
 
 void free_neuron(struct Neuron *neuron);
 struct Neuron *create_neuron(int n_weights);
-void init_neuron(struct Neuron *neuron, struct Value inputs[]);
+void forward_neuron(struct Neuron *neuron, struct Value inputs[]);
 void print_neuron(struct Neuron *n);
 
 struct Layer *create_layer(int nin, int n_neurons);
@@ -77,4 +79,5 @@ void free_layer(struct Layer *layer);
 void forward_layer(struct Layer *layer, struct Value inputs[]);
 
 struct MLP create_mlp(int nin, int numLayers);
+void forward_mlp(struct MLP *mlp, struct Value inputs[]);
 void destroy_mlp(struct MLP *mlp);
