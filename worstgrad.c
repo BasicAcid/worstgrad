@@ -5,29 +5,64 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-struct Value
-create_value(double data, const char *label)
-{
-    struct Value val;
-    val.data = data;
-    //val.grad = 1.0; // Gradient of a value with respect to itself is 1 ?
-    // Answer: you fool, was causing a problem when called trough backward.
-    // The right value is 0.
-    val.grad = 0.0;
-    snprintf(val.label, sizeof(val.label), "%s", label);  // Copy the label string.
+/* struct Value */
+/* create_value(double data, const char *label) */
+/* { */
+/*     struct Value val; */
+/*     val.data = data; */
+/*     //val.grad = 1.0; // Gradient of a value with respect to itself is 1 ? */
+/*     // Answer: you fool, was causing a problem when called trough backward. */
+/*     // The right value is 0. */
+/*     val.grad = 0.0; */
+/*     snprintf(val.label, sizeof(val.label), "%s", label);  // Copy the label string. */
 
-    // Setting the operator to something is necessary for get_parents() .
+/*     // Setting the operator to something is necessary for get_parents() . */
+/*     snprintf(val.operator, sizeof(val.operator), "root"); */
+
+/*     // Magic number! */
+/*     for(int i = 0; i < 2; i++) */
+/*     { */
+/*         val.parents[i] = NULL; */
+/*     } */
+
+/*     val.backward = NULL; */
+/*     val.visited = false; */
+/*     return val; */
+/* } */
+
+struct Value create_value(double data, const char *label) {
+    struct Value val;
+
+    val.data = data;
+    val.grad = 0.0;
+
+    // Dynamic memory allocation for the label.
+    val.label = malloc(strlen(label) + 1);  // +1 for the null terminator.
+
+    if(val.label == NULL)
+    {
+        memset(&val, 0, sizeof(struct Value));
+        return val;
+    }
+    strcpy(val.label, label);
+
+    // Setting the operator to something is necessary for get_parents().
     snprintf(val.operator, sizeof(val.operator), "root");
 
     // Magic number!
-    for(int i = 0; i < 2; i++)
-    {
+    for (int i = 0; i < 2; i++) {
         val.parents[i] = NULL;
     }
 
     val.backward = NULL;
     val.visited = false;
+
     return val;
+}
+
+void free_value(struct Value *val)
+{
+    free(val->label);
 }
 
 void

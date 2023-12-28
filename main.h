@@ -4,13 +4,13 @@ enum { max_parents = 2 };
 
 struct Value
 {
-    double data;
-    double grad;
-    char label[30];
-    char operator[10];
     struct Value *parents[max_parents];
     void (*backward)(struct Value*);
-    bool visited; // For topological sort.
+    double data;
+    double grad;
+    char *label;
+    char operator[5];
+    unsigned int visited : 1; // For topological sort.
 };
 
 struct Stack
@@ -43,6 +43,7 @@ struct MLP
 };
 
 struct Value create_value(double data, const char *label);
+void free_value(struct Value *val);
 
 struct Value w_add(struct Value *v1, struct Value *v2, const char *label);
 struct Value w_sub(struct Value *v1, struct Value *v2, const char *label);

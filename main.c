@@ -7,30 +7,40 @@ main(void)
 {
     /* Test template 1. ******************************************************/
 
-    /* struct Value a = create_value(-2, "a"); */
-    /* struct Value b = create_value(3, "b"); */
-    /* struct Value d = w_sub(&a, &b, "d"); */
-    /* struct Value g = w_tanh(&d, "g"); */
+    struct Value a = create_value(-2, "a");
+    struct Value b = create_value(3, "b");
+    struct Value d = w_sub(&a, &b, "d");
+    struct Value g = w_tanh(&d, "g");
 
-    /* g.grad = 1.0; */
+    printf("%lu\n", sizeof(struct Value));
 
-    /* struct Stack stack; */
+    g.grad = 1.0;
 
-    /* // Find a way to automate this. */
-    /* int initial_capacity = 100; */
-    /* init_stack(&stack, initial_capacity); */
+    struct Stack stack;
 
-    /* dfs_to_stack(&g, &stack); */
+    // Find a way to automate this.
+    int initial_capacity = 100;
+    init_stack(&stack, initial_capacity);
 
-    /* //double h = 0.001; */
+    dfs_to_stack(&g, &stack);
 
-    /* //grandient_descent(&stack, h, 200); */
+    double h = 0.001;
 
-    /* backward_stack(&stack); */
+    grandient_descent(&stack, h, 100);
 
-    /* print_stack(&stack); */
+    backward_stack(&stack);
 
-    /* cleanup_stack(&stack); */
+    print_stack(&stack);
+
+    cleanup_stack(&stack);
+
+    free_value(&a);
+    free_value(&b);
+    free_value(&d);
+    free_value(&g);
+
+
+
 
     /* Backward problem template*************************************************/
 
@@ -185,17 +195,15 @@ main(void)
 
     /* Layer test template   *******************************************/
 
-    struct Layer *layer_test = create_layer(2, 3);
+    //struct Layer *layer_test = create_layer(2, 3);
 
-    struct Value in1 = create_value(2.0, "in1");
-    struct Value in2 = create_value(3.0, "in2");
-    struct Value inputs[] = {in1, in2};
+    /* struct Value in1 = create_value(2.0, "in1"); */
+    /* struct Value in2 = create_value(3.0, "in2"); */
+    /* struct Value inputs[] = {in1, in2}; */
 
-    forward_layer(layer_test, inputs);
+    //forward_layer(layer_test, inputs);
 
-    //free_neuron(&layer_test->neurons[0]);
-
-    free_layer(layer_test);
+    //free_layer(layer_test);
 
     /* MLP test template *********************************************************/
 
