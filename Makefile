@@ -32,14 +32,14 @@ build: $(TARGET)
 
 debug: $(DEBUG_TARGET)
 
-$(TARGET): $(OBJS)
+$(TARGET): $(OBJS) main.h
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 $(DEBUG_TARGET): CFLAGS += $(DEBUG_FLAGS)
-$(DEBUG_TARGET): $(OBJS)
+$(DEBUG_TARGET): $(OBJS) main.h
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
-%.o: %.c
+%.o: %.c main.h
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 run: build
