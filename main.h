@@ -85,4 +85,8 @@ void destroy_mlp(struct MLP *mlp);
 
 
 // Tests
-void test_1();
+void test_1(struct Value a, struct Value b);
+void test_2(struct Value a, struct Value b);
+void test_3(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b);
+void test_4(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b, struct Value z);
+void test_5(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b, struct Value z, struct Value io1);

@@ -30,17 +30,13 @@ test_1(struct Value a, struct Value b)
 
     cleanup_stack(&stack);
 
-    free_value(&a);
-    free_value(&b);
     free_value(&d);
     free_value(&g);
 }
 
 void
-test_2()
+test_2(struct Value a, struct Value b)
 {
-    struct Value a = create_value(-2, "a");
-    struct Value b = create_value(3, "b");
     struct Value c = w_mul(&a, &b, "c");
     struct Value g = w_tanh(&c, "g");
     g.grad = 1.0;
@@ -56,16 +52,14 @@ test_2()
 
     print_stack(&stack);
     cleanup_stack(&stack);
+
+    free_value(&c);
+    free_value(&g);
 }
 
 void
-test_3()
+test_3(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b)
 {
-    struct Value x1 = create_value(2.0, "x1");
-    struct Value x2 = create_value(0.0, "x2");
-    struct Value w1 = create_value(-3.0, "w1");
-    struct Value w2 = create_value(1.0, "w2");
-    struct Value b = create_value(6.8813735870195432, "b");
     struct Value x1w1 = w_mul(&x1, &w1, "x1w1");
     struct Value x2w2 = w_mul(&x2, &w2, "x2w2");
     struct Value x1w1x2w2 = w_add(&x1w1, &x2w2, "x1*w1 + x2*w2");
@@ -86,18 +80,17 @@ test_3()
     print_stack(&stack);
 
     cleanup_stack(&stack);
+
+    free_value(&x1w1);
+    free_value(&x2w2);
+    free_value(&x1w1x2w2);
+    free_value(&n);
+    free_value(&o);
 }
 
 void
-test_4()
+test_4(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b, struct Value z)
 {
-    struct Value x1 = create_value(2.0, "x1");
-    struct Value x2 = create_value(0.0, "x2");
-    struct Value w1 = create_value(-3.0, "w1");
-    struct Value w2 = create_value(1.0, "w2");
-
-    struct Value b = create_value(6.8813735870195432, "b");
-
     struct Value x1w1 = w_mul(&x1, &w1, "x1w1");
     struct Value x2w2 = w_mul(&x2, &w2, "x2w2");
     struct Value x1w1x2w2 = w_add(&x1w1, &x2w2, "x1*w1 + x2*w2");
@@ -105,7 +98,6 @@ test_4()
     struct Value n = w_add(&x1w1x2w2, &b, "n");
 
     /* // Intermediate values. */
-    struct Value z = create_value(2.0, "z");
     struct Value x = w_mul(&n, &z, "x");
 
     /* /\* e = (2*n).exp() *\/ */
@@ -125,39 +117,37 @@ test_4()
     print_stack(&stack);
 
     cleanup_stack(&stack);
+
+    free_value(&x1w1);
+    free_value(&x2w2);
+    free_value(&x1w1x2w2);
+    free_value(&n);
+    free_value(&x);
+    free_value(&e);
 }
 
 void
-test_6()
+test_5(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b, struct Value z, struct Value io1)
 {
-    struct Value x1 = create_value(2.0, "x1");
-    struct Value x2 = create_value(0.0, "x2");
-    struct Value w1 = create_value(-3.0, "w1");
-    struct Value w2 = create_value(1.0, "w2");
-
-    struct Value b = create_value(6.8813735870195432, "b");
-
     struct Value x1w1 = w_mul(&x1, &w1, "x1w1");
     struct Value x2w2 = w_mul(&x2, &w2, "x2w2");
     struct Value x1w1x2w2 = w_add(&x1w1, &x2w2, "x1*w1 + x2*w2");
 
     struct Value n = w_add(&x1w1x2w2, &b, "n");
 
-/* // Intermediate values. */
-    struct Value z = create_value(2.0, "z");
+    // Intermediate values.
     struct Value x = w_mul(&n, &z, "x");
 
-/* /\* e = (2*n).exp() *\/ */
+    ///\* e = (2*n).exp() *\/ */
     struct Value e = w_exp(&x, "e");
 
-/* // Intermediate values. */
-    struct Value io1 = create_value(1.0, "io1");
-// struct Value io2 = create_value(1.0, "io2");
+    // Intermediate values.
+    // struct Value io2 = create_value(1.0, "io2");
     struct Value io3 = w_add(&e, &io1, "io3");
-// struct Value io4 = w_add(&e, &io2, "io4");
+    // struct Value io4 = w_add(&e, &io2, "io4");
 
-// o = (e - 1) / (e + 1)
-// struct Value o = w_div(&io3, &io4, "o");
+    // o = (e - 1) / (e + 1)
+    // struct Value o = w_div(&io3, &io4, "o");
 
     io3.grad = 1.0;
 
@@ -173,11 +163,19 @@ test_6()
     print_stack(&stack);
 
     cleanup_stack(&stack);
+
+    free_value(&x1w1);
+    free_value(&x2w2);
+    free_value(&x1w1x2w2);
+    free_value(&n);
+    free_value(&x);
+    free_value(&e);
+    free_value(&io3);
 }
 
 /* Neuron test template **************************************************/
 void
-test_7()
+test_6()
 {
     struct Neuron *n1 = create_neuron(2);
     struct Neuron *n2 = create_neuron(2);
@@ -199,7 +197,7 @@ test_7()
 
 /* Layer test template   *******************************************/
 void
-test_8()
+test_7()
 {
     struct Layer *layer_test = create_layer(2, 3);
 
@@ -214,7 +212,7 @@ test_8()
 
 //MLP test template
 void
-test_9()
+test_8()
 {
     int n_layers = 5;
     struct MLP my_mlp = create_mlp(10, n_layers);
