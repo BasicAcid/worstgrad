@@ -8,8 +8,6 @@ test_1(struct Value a, struct Value b)
     struct Value d = w_sub(&a, &b, "d");
     struct Value g = w_tanh(&d, "g");
 
-    printf("%lu\n", sizeof(struct Value));
-
     g.grad = 1.0;
 
     struct Stack stack;
@@ -173,29 +171,14 @@ test_5(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struc
     free_value(&io3);
 }
 
-/* Neuron test template **************************************************/
 void
-test_6()
+test_6(struct Neuron *n1, struct Neuron *n2, struct Neuron *n3, struct Value *inputs)
 {
-    struct Neuron *n1 = create_neuron(2);
-    struct Neuron *n2 = create_neuron(2);
-    struct Neuron *n3 = create_neuron(2);
-
-    struct Value in1 = create_value(2.0, "in1");
-    struct Value in2 = create_value(3.0, "in2");
-    struct Value in3 = create_value(5.0, "in2");
-    struct Value inputs[] = {in1, in2, in3};
-
-    forward_neuron(n1, inputs);
-    forward_neuron(n2, inputs);
-    forward_neuron(n3, inputs);
-
-    free_neuron(n1);
-    free_neuron(n2);
-    free_neuron(n3);
+    forward_neuron(&n1, &inputs);
+    /* forward_neuron(n2, inputs); */
+    /* forward_neuron(n3, inputs); */
 }
 
-/* Layer test template   *******************************************/
 void
 test_7()
 {
@@ -210,7 +193,6 @@ test_7()
     free_layer(layer_test);
 }
 
-//MLP test template
 void
 test_8()
 {

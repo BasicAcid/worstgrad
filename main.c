@@ -16,12 +16,22 @@ main(void)
     struct Value z = create_value(2.0, "z");
     struct Value io1 = create_value(1.0, "io1");
 
+    struct Neuron *n1 = create_neuron(2);
+    struct Neuron *n2 = create_neuron(2);
+    struct Neuron *n3 = create_neuron(2);
+
+    struct Value in1 = create_value(2.0, "in1");
+    struct Value in2 = create_value(3.0, "in2");
+    struct Value in3 = create_value(5.0, "in2");
+    struct Value *inputs[] = {&in1, &in2, &in3};
+
     // Tests functions.
     test_1(a, b);
     test_2(a, b);
     test_3(x1, x2, w1, w2, bias);
     test_4(x1, x2, w1, w2, bias, z);
     test_5(x1, x2, w1, w2, bias, z, io1);
+    test_6(n1, n2, n3, &inputs);
 
     // Free memory.
     free_value(&a);
@@ -33,6 +43,14 @@ main(void)
     free_value(&bias);
     free_value(&z);
     free_value(&io1);
+    free_value(&in1);
+    free_value(&in2);
+    free_value(&in3);
+    free_value(&inputs);
+
+    free_neuron(n1);
+    free_neuron(n2);
+    free_neuron(n3);
 
     return 0;
 }

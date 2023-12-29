@@ -45,15 +45,15 @@ struct Neuron *create_neuron(int n_weights)
     return neuron;
 }
 
-
 void
-forward_neuron(struct Neuron *neuron, struct Value inputs[])
+forward_neuron(struct Neuron *neuron, struct Value *inputs)
 {
     for(int i = 0; i < neuron->n_inputs; i++)
     {
         neuron->output.data = (neuron->weights[i].data * inputs[i].data) + neuron->bias.data;
     }
 
+    // Activation: uncomment tanh or relu:
     //neuron->output = w_tanh(&neuron->output, "output");
     neuron->output = w_relu(&neuron->output, "output");
 }
