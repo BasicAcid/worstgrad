@@ -3,8 +3,11 @@
 #include "main.h"
 
 void
-test_1(struct Value a, struct Value b, struct Value d, struct Value g)
+test_1(struct Value a, struct Value b)
 {
+    struct Value d = w_sub(&a, &b, "d");
+    struct Value g = w_tanh(&d, "g");
+
     printf("%lu\n", sizeof(struct Value));
 
     g.grad = 1.0;
