@@ -17,7 +17,7 @@ CFLAGS := -Wall \
 DEBUG_FLAGS = -O0 -DDEBUG
 LIBS = -lm
 
-SRCS = main.c worstgrad.c neuron.c layer.c mlp.c
+SRCS = main.c worstgrad.c neuron.c layer.c mlp.c tests.c
 OBJS = $(SRCS:.c=.o)
 
 BIN_DIR = ./bin
@@ -46,7 +46,7 @@ run: build
 	$(TARGET)
 
 tags:
-	etags main.c worstgrad.c neuron.c layer.c main.h
+	etags main.c worstgrad.c neuron.c layer.c main.h tests.c
 
 clean:
 	rm -rf *.o $(BIN_DIR)/*.o $(TARGET) $(DEBUG_TARGET)

@@ -82,3 +82,7 @@ void forward_layer(struct Layer *layer, struct Value inputs[]);
 struct MLP create_mlp(int nin, int n_layers);
 void forward_mlp(struct MLP *mlp, struct Value inputs[]);
 void destroy_mlp(struct MLP *mlp);
+
+
+// Tests
+void test_1();
