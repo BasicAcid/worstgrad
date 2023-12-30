@@ -10,7 +10,7 @@ struct Neuron *create_neuron(int n_weights)
 
     struct Neuron *neuron = malloc(neuron_size);
 
-    if (neuron == NULL)
+    if(neuron == NULL)
     {
         fprintf(stderr, "Error (create_neuron): Unable to allocate memory.\n");
         exit(EXIT_FAILURE);
@@ -48,19 +48,29 @@ struct Neuron *create_neuron(int n_weights)
 void
 forward_neuron(struct Neuron *neuron, struct Value *inputs)
 {
+    printf("Number of inputs: %d\n", neuron->n_inputs);
+
     for(int i = 0; i < neuron->n_inputs; i++)
     {
-        neuron->output.data = (neuron->weights[i].data * inputs[i].data) + neuron->bias.data;
+        printf("Processing input %d\n", i);
+        neuron->output.data += neuron->weights[i].data * inputs[i].data;
     }
 
+    neuron->output.data += neuron->bias.data;
+
     // Activation: uncomment tanh or relu:
-    //neuron->output = w_tanh(&neuron->output, "output");
-    neuron->output = w_relu(&neuron->output, "output");
+    neuron->output = w_tanh(&neuron->output, "output");
+    //neuron->output = w_relu(&neuron->output, "output");
+
+    free(neuron->output.label);
 }
 
 void
 free_neuron(struct Neuron *neuron)
 {
+    if(neuron == NULL)
+        return;
+
     free(neuron);
 }
 

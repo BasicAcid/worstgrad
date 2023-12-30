@@ -174,9 +174,10 @@ test_5(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struc
 void
 test_6(struct Neuron *n1, struct Neuron *n2, struct Neuron *n3, struct Value *inputs)
 {
-    forward_neuron(&n1, &inputs);
-    /* forward_neuron(n2, inputs); */
-    /* forward_neuron(n3, inputs); */
+    printf("Number of inputs: %d\n", n1->n_inputs);
+    forward_neuron(n1, &inputs);
+    forward_neuron(n2, inputs);
+    forward_neuron(n3, inputs);
 }
 
 void
