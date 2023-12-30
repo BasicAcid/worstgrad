@@ -33,10 +33,6 @@ main(void)
     test_5(x1, x2, w1, w2, bias, z, io1);
     test_6(n1, n2, n3, &inputs);
 
-    print_neuron(n1);
-    print_neuron(n2);
-    print_neuron(n3);
-
     // Free memory.
     free_value(&a);
     free_value(&b);

@@ -176,8 +176,8 @@ test_6(struct Neuron *n1, struct Neuron *n2, struct Neuron *n3, struct Value *in
 {
     printf("Number of inputs: %d\n", n1->n_inputs);
     forward_neuron(n1, &inputs);
-    forward_neuron(n2, inputs);
-    forward_neuron(n3, inputs);
+    forward_neuron(n2, &inputs);
+    forward_neuron(n3, &inputs);
 }
 
 void
