@@ -46,14 +46,11 @@ struct Neuron *create_neuron(int n_weights)
 }
 
 void
-forward_neuron(struct Neuron *neuron, struct Value *inputs)
+forward_neuron(struct Neuron *neuron, struct Value *inputs[])
 {
-    printf("Number of inputs: %d\n", neuron->n_inputs);
-
     for(int i = 0; i < neuron->n_inputs; i++)
     {
-        printf("Processing input %d\n", i);
-        neuron->output.data += neuron->weights[i].data * inputs[i].data;
+        neuron->output.data += neuron->weights[i].data * inputs[i]->data;
     }
 
     neuron->output.data += neuron->bias.data;

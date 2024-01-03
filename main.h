@@ -72,12 +72,12 @@ void print_stack(struct Stack *stack);
 
 void free_neuron(struct Neuron *neuron);
 struct Neuron *create_neuron(int n_weights);
-void forward_neuron(struct Neuron *neuron, struct Value *inputs);
+void forward_neuron(struct Neuron *neuron, struct Value *inputs[]);
 void print_neuron(struct Neuron *n);
 
 struct Layer *create_layer(int nin, int n_out);
 void free_layer(struct Layer *layer);
-void forward_layer(struct Layer *layer, struct Value inputs[]);
+void forward_layer(struct Layer *layer, struct Value *inputs[]);
 
 struct MLP create_mlp(int nin, int n_layers);
 void forward_mlp(struct MLP *mlp, struct Value inputs[]);
@@ -89,4 +89,4 @@ void test_2(struct Value a, struct Value b);
 void test_3(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b);
 void test_4(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b, struct Value z);
 void test_5(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b, struct Value z, struct Value io1);
-void test_6(struct Neuron *n1, struct Neuron *n2, struct Neuron *n3, struct Value *inputs);
+void test_6(struct Neuron *n1, struct Neuron *n2, struct Neuron *n3, struct Value *inputs[]);

@@ -31,7 +31,13 @@ main(void)
     test_3(x1, x2, w1, w2, bias);
     test_4(x1, x2, w1, w2, bias, z);
     test_5(x1, x2, w1, w2, bias, z, io1);
-    test_6(n1, n2, n3, &inputs);
+    test_6(n1, n2, n3, inputs);
+
+
+
+    //test_7();
+
+
 
     // Free memory.
     free_value(&a);
@@ -46,7 +52,6 @@ main(void)
     free_value(&in1);
     free_value(&in2);
     free_value(&in3);
-    free_value(&inputs);
 
     free_neuron(n1);
     free_neuron(n2);

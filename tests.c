@@ -172,26 +172,30 @@ test_5(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struc
 }
 
 void
-test_6(struct Neuron *n1, struct Neuron *n2, struct Neuron *n3, struct Value *inputs)
+test_6(struct Neuron *n1, struct Neuron *n2, struct Neuron *n3, struct Value *inputs[])
 {
-    printf("Number of inputs: %d\n", n1->n_inputs);
-    forward_neuron(n1, &inputs);
-    forward_neuron(n2, &inputs);
-    forward_neuron(n3, &inputs);
+    //printf("Number of inputs: %d\n", n1->n_inputs);
+    forward_neuron(n1, inputs);
+    forward_neuron(n2, inputs);
+    forward_neuron(n3, inputs);
 }
 
 void
 test_7()
 {
-    struct Layer *layer_test = create_layer(2, 3);
+    /* struct Layer *layer_test = create_layer(2, 3); */
 
-    struct Value in1 = create_value(2.0, "in1");
-    struct Value in2 = create_value(3.0, "in2");
-    struct Value inputs[] = {in1, in2};
+    /* struct Value in4 = create_value(2.0, "in4"); */
+    /* struct Value in5 = create_value(3.0, "in5"); */
+    //struct Value inputs2[] = {in4, in5};
 
-    forward_layer(layer_test, inputs);
+    //forward_layer(layer_test, &inputs);
 
-    free_layer(layer_test);
+    /* free_layer(layer_test); */
+
+    /* free_value(&in1); */
+    /* free_value(&in2); */
+    /* free_value(&inputs); */
 }
 
 void

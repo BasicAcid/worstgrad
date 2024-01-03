@@ -32,7 +32,7 @@ struct Layer *create_layer(int nin, int n_out)
 }
 
 void
-forward_layer(struct Layer *layer, struct Value inputs[])
+forward_layer(struct Layer *layer, struct Value *inputs[])
 {
     if (layer == NULL)
     {
