@@ -181,17 +181,13 @@ test_6(struct Neuron *n1, struct Neuron *n2, struct Neuron *n3, struct Value *in
 }
 
 void
-test_7()
+test_7(struct Value *inputs[])
 {
-    /* struct Layer *layer_test = create_layer(2, 3); */
+    struct Layer *layer_test = create_layer(2, 3);
 
-    /* struct Value in4 = create_value(2.0, "in4"); */
-    /* struct Value in5 = create_value(3.0, "in5"); */
-    //struct Value inputs2[] = {in4, in5};
+    forward_layer(layer_test, inputs);
 
-    //forward_layer(layer_test, &inputs);
-
-    /* free_layer(layer_test); */
+    free_layer(layer_test);
 
     /* free_value(&in1); */
     /* free_value(&in2); */

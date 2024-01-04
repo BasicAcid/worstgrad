@@ -4,6 +4,10 @@
 #include "main.h"
 #include <sys/time.h>
 
+// Necessary to get a different value each time
+// create_neuron is called.
+long int global_seed = 0;
+
 struct Neuron *create_neuron(int n_weights)
 {
     size_t neuron_size = sizeof(struct Neuron) + sizeof(struct Value) * (long unsigned int)n_weights;
@@ -21,13 +25,14 @@ struct Neuron *create_neuron(int n_weights)
     // Set the pointer for the weights array.
     neuron->weights = (struct Value *)((char *)neuron + sizeof(struct Neuron));
 
-    struct timeval currentTime;
-    gettimeofday(&currentTime, NULL);
-
-    // Combine seconds and microseconds, seems to be a good practice to do this.
-    // Required here? Probably not.
-    long int seed = currentTime.tv_sec * 1000 + currentTime.tv_usec / 1000;
-    srand48(seed);
+    if (global_seed == 0)
+    {
+        // Initialize the seed only if it's not set.
+        struct timeval currentTime;
+        gettimeofday(&currentTime, NULL);
+        global_seed = currentTime.tv_sec * 1000 + currentTime.tv_usec / 1000;
+        srand48(global_seed);
+    }
 
     for (int i = 0; i < n_weights; i++)
     {
@@ -44,6 +49,48 @@ struct Neuron *create_neuron(int n_weights)
 
     return neuron;
 }
+
+
+/* struct Neuron *create_neuron(int n_weights) */
+/* { */
+/*     size_t neuron_size = sizeof(struct Neuron) + sizeof(struct Value) * (long unsigned int)n_weights; */
+
+/*     struct Neuron *neuron = malloc(neuron_size); */
+
+/*     if(neuron == NULL) */
+/*     { */
+/*         fprintf(stderr, "Error (create_neuron): Unable to allocate memory.\n"); */
+/*         exit(EXIT_FAILURE); */
+/*     } */
+
+/*     neuron->n_inputs = n_weights; */
+
+/*     // Set the pointer for the weights array. */
+/*     neuron->weights = (struct Value *)((char *)neuron + sizeof(struct Neuron)); */
+
+/*     struct timeval currentTime; */
+/*     gettimeofday(&currentTime, NULL); */
+
+/*     // Combine seconds and microseconds, seems to be a good practice to do this. */
+/*     // Required here? Probably not. */
+/*     long int seed = currentTime.tv_sec * 1000 + currentTime.tv_usec / 1000; */
+/*     srand48(seed); */
+
+/*     for (int i = 0; i < n_weights; i++) */
+/*     { */
+/*         // Use drand48 for better randomness and a uniform distribution between [0, 1) */
+/*         neuron->weights[i].data = -1.0 + 2.0 * drand48(); */
+/*     } */
+
+/*     // Random bias between -1 and 1. */
+/*     neuron->bias.data = -1.0 + 2.0 * drand48(); */
+
+/*     neuron->n_inputs = n_weights; */
+
+/*     neuron->output.data = 0.0; */
+
+/*     return neuron; */
+/* } */
 
 void
 forward_neuron(struct Neuron *neuron, struct Value *inputs[])

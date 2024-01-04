@@ -90,3 +90,4 @@ void test_3(struct Value x1, struct Value x2, struct Value w1, struct Value w2, 
 void test_4(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b, struct Value z);
 void test_5(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b, struct Value z, struct Value io1);
 void test_6(struct Neuron *n1, struct Neuron *n2, struct Neuron *n3, struct Value *inputs[]);
+void test_7(struct Value *inputs[]);
