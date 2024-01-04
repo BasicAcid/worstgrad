@@ -185,13 +185,9 @@ test_7(struct Value *inputs[])
 {
     struct Layer *layer_test = create_layer(2, 3);
 
-    forward_layer(layer_test, inputs);
+    //forward_layer(layer_test, inputs);
 
     free_layer(layer_test);
-
-    /* free_value(&in1); */
-    /* free_value(&in2); */
-    /* free_value(&inputs); */
 }
 
 void

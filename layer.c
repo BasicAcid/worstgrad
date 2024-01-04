@@ -3,7 +3,8 @@
 #include "main.h"
 #include <unistd.h>
 
-struct Layer *create_layer(int nin, int n_out)
+struct Layer
+*create_layer(int nin, int n_out)
 {
     struct Layer *layer = malloc(sizeof(struct Layer));
 
@@ -13,16 +14,18 @@ struct Layer *create_layer(int nin, int n_out)
         exit(EXIT_FAILURE);
     }
 
-    layer->neurons = malloc((long unsigned int)n_out * sizeof(struct Neuron));
+    //layer->neurons = malloc((long unsigned int)n_out * sizeof(struct Neuron));
 
-    if(layer->neurons == NULL)
-    {
-        fprintf(stderr, "Error (create_layer): Unable to allocate memory for neurons.\n");
-        exit(EXIT_FAILURE);
-    }
+    /* if(layer->neurons == NULL) */
+    /* { */
+    /*     fprintf(stderr, "Error (create_layer): Unable to allocate memory for neurons.\n"); */
+    /*     exit(EXIT_FAILURE); */
+    /* } */
 
-    for(int i = 0; i < n_out; i++)
-        layer->neurons[i] = *create_neuron(nin);
+    /* for(int i = 0; i < n_out; i++) */
+    /* { */
+    /*     layer->neurons[i] = *create_neuron(nin); */
+    /* } */
 
     layer->nin = nin;
     layer->nout = n_out;
@@ -49,14 +52,17 @@ free_layer(struct Layer *layer)
     if(layer == NULL)
         return;
 
-    for(int i = 0; i < layer->nout; i++)
-    {
-        print_neuron(&layer->neurons[i]);
+    /* for(int i = 0; i < layer->nout; i++) */
+    /* { */
+    /*     print_neuron(&layer->neurons[i]); */
 
-        //free_neuron(&layer->neurons[i]);
-    }
+    /*     //free_neuron(&layer->neurons[i]); */
+    /* } */
 
-    free(layer->neurons);
+    //free(layer->neurons);
+
+    //free(layer->nin);
+    //free(layer->nout);
 
     free(layer);
 }
