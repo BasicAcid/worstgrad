@@ -22,14 +22,7 @@ struct Layer *create_layer(int nin, int n_out)
     }
 
     for(int i = 0; i < n_out; i++)
-    {
         layer->neurons[i] = *create_neuron(nin);
-
-        // TODO: Make it sleep to make it work...
-        //sleep(1);
-    }
-
-
 
     layer->nin = nin;
     layer->nout = n_out;
