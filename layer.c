@@ -14,7 +14,7 @@ struct Layer
         exit(EXIT_FAILURE);
     }
 
-    //layer->neurons = malloc((long unsigned int)n_out * sizeof(struct Neuron));
+    layer->neurons = malloc((long unsigned int)n_out * sizeof(struct Neuron));
 
     /* if(layer->neurons == NULL) */
     /* { */
@@ -59,7 +59,7 @@ free_layer(struct Layer *layer)
     /*     //free_neuron(&layer->neurons[i]); */
     /* } */
 
-    //free(layer->neurons);
+    free(layer->neurons);
 
     //free(layer->nin);
     //free(layer->nout);
