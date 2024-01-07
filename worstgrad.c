@@ -310,84 +310,51 @@ struct Value
 {
     struct Value *list;
 
+    list = malloc(2 * sizeof(struct Value));
+
     if(strcmp("+", v->operator) == 0)
     {
-        list = (struct Value*)malloc(2 * sizeof(struct Value));
-
         for(int i = 0; i < 2; i++)
-        {
             list[i] = *v->parents[i];
-        }
     }
 
     else if(strcmp("-", v->operator) == 0)
     {
-        list = (struct Value*)malloc(2 * sizeof(struct Value));
-
         for(int i = 0; i < 2; i++)
-        {
             list[i] = *v->parents[i];
-        }
     }
     else if(strcmp("*", v->operator) == 0)
     {
-        list = (struct Value*)malloc(2 * sizeof(struct Value));
-
         for(int i = 0; i < 2; i++)
-        {
             list[i] = *v->parents[i];
-        }
     }
     else if(strcmp("/", v->operator) == 0)
     {
-        list = (struct Value*)malloc(2 * sizeof(struct Value));
-
         for(int i = 0; i < 2; i++)
-        {
             list[i] = *v->parents[i];
-        }
     }
     else if(strcmp("tanh", v->operator) == 0)
     {
-        list = (struct Value*)malloc(sizeof(struct Value));
-
         for(int i = 0; i < 1; i++)
-        {
             list[i] = *v->parents[i];
-        }
     }
     else if(strcmp("relu", v->operator) == 0)
     {
-        list = (struct Value*)malloc(sizeof(struct Value));
-
         for(int i = 0; i < 1; i++)
-        {
             list[i] = *v->parents[i];
-        }
     }
     else if(strcmp("exp", v->operator) == 0)
     {
-        list = (struct Value*)malloc(sizeof(struct Value));
-
         for(int i = 0; i < 1; i++)
-        {
             list[i] = *v->parents[i];
-        }
     }
     else if(strcmp("pow", v->operator) == 0)
     {
-        list = (struct Value*)malloc(2 * sizeof(struct Value));
-
         for(int i = 0; i < 2; i++)
-        {
             list[i] = *v->parents[i];
-        }
     }
     else
     {
-        /* list = (struct Value*)malloc(sizeof(struct Value)); */
-
-        /* list = v; */
         return NULL;
     }
     return list;
@@ -416,7 +383,7 @@ void
 init_stack(struct Stack *stack, int initial_capacity)
 {
     size_t items_size = (long unsigned int)initial_capacity * sizeof(struct Value *);
-    stack->items = (struct Value **)malloc(items_size);
+    stack->items = malloc(items_size);
     stack->top = -1;
     stack->capacity = initial_capacity;
 }

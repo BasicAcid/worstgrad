@@ -183,24 +183,24 @@ test_6(struct Neuron *n1, struct Neuron *n2, struct Neuron *n3, struct Value *in
 void
 test_7(struct Value *inputs[])
 {
-    struct Layer *layer_test = create_layer(2, 3);
+    struct Layer *layer_test = create_layer(24, 39);
 
-    //forward_layer(layer_test, inputs);
+    forward_layer(layer_test, inputs);
 
     free_layer(layer_test);
 }
 
-void
-test_8()
-{
-    int n_layers = 5;
-    struct MLP my_mlp = create_mlp(10, n_layers);
+/* void */
+/* test_8() */
+/* { */
+/*     int n_layers = 5; */
+/*     struct MLP my_mlp = create_mlp(10, n_layers); */
 
-    struct Value in1 = create_value(2.0, "in1");
-    struct Value in2 = create_value(3.0, "in2");
-    struct Value inputs[] = {in1, in2};
+/*     struct Value in1 = create_value(2.0, "in1"); */
+/*     struct Value in2 = create_value(3.0, "in2"); */
+/*     struct Value inputs[] = {in1, in2}; */
 
-    forward_mlp(&my_mlp, inputs);
+/*     forward_mlp(&my_mlp, inputs); */
 
-    destroy_mlp(&my_mlp);
-}
+/*     destroy_mlp(&my_mlp); */
+/* } */

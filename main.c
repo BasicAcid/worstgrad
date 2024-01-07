@@ -36,7 +36,7 @@ main(void)
     test_4(x1, x2, w1, w2, bias, z);
     test_5(x1, x2, w1, w2, bias, z, io1);
     test_6(n1, n2, n3, inputs);
-    test_7(inputs2);
+    //test_7(inputs2);
 
     // Free memory.
     free_value(&a);

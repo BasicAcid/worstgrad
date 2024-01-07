@@ -55,7 +55,12 @@ forward_neuron(struct Neuron *neuron, struct Value *inputs[])
 {
     for(int i = 0; i < neuron->n_inputs; i++)
     {
-        neuron->output.data += neuron->weights[i].data * inputs[i]->data;
+        //neuron->output.data += neuron->weights[i].data * inputs[i]->data;
+        //neuron->output.data += inputs[i]->data;
+        // TODO: Allocation bug
+        // inputs[i]->data is not set correctly.
+        printf("%f\n", inputs[i]->data);
+        printf("%d\n", i);
     }
 
     neuron->output.data += neuron->bias.data;
@@ -64,16 +69,18 @@ forward_neuron(struct Neuron *neuron, struct Value *inputs[])
     neuron->output = w_tanh(&neuron->output, "output");
     //neuron->output = w_relu(&neuron->output, "output");
 
-    free(neuron->output.label);
+    if (neuron->output.label != NULL)
+    {
+        free(neuron->output.label);
+        neuron->output.label = NULL;
+    }
 }
 
 void
 free_neuron(struct Neuron *neuron)
 {
-    if(neuron == NULL)
-        return;
-
-    free(neuron);
+    if(neuron != NULL)
+        free(neuron);
 }
 
 void

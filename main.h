@@ -32,7 +32,7 @@ struct Layer
 {
     int nin;
     int nout;
-    struct Neuron *neurons;
+    struct Neuron **neurons;
 };
 
 struct MLP
