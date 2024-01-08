@@ -54,7 +54,6 @@ struct Value create_value(double data, const char *label) {
         val.parents[i] = NULL;
     }
 
-    val.backward = NULL;
     val.visited = false;
 
     return val;

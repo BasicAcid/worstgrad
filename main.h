@@ -1,15 +1,16 @@
 #include <stdbool.h>
 
+// TODO
+// This will create problems in the future.
 enum { max_parents = 2 };
 
 struct Value
 {
     struct Value *parents[max_parents];
-    void (*backward)(struct Value*);
     double data;
     double grad;
     char *label;
-    char operator[5];
+    char operator[5]; // TODO: bad...
     unsigned int visited : 1; // For topological sort.
 };
 
