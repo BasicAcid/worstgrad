@@ -1,6 +1,18 @@
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 #include "main.h"
+
+void
+t_create_val()
+{
+    struct Value a = create_value(-2, "a");
+    a.grad = 1.0;
+
+    assert(a.data == -2);
+    assert(strcmp(a.label, "a") == 0);
+    assert(a.grad == 1.0);
+}
 
 /* void */
 /* test_1(struct Value a, struct Value b) */

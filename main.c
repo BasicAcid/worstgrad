@@ -8,10 +8,6 @@ main(void)
     // Some values.
     // TODO: add a way to initialize arrays of values.
     // TODO: generate arrays explicitly or at random based on some distribution.
-
-
-    //struct Arena *my_arena = create_arena(24);
-
     struct Value a = create_value(-2, "a");
     struct Value b = create_value(3, "b");
     struct Value x1 = create_value(2.0, "x1");
@@ -21,6 +17,10 @@ main(void)
     struct Value bias = create_value(6.8813735870195432, "b");
     struct Value z = create_value(2.0, "z");
     struct Value io1 = create_value(1.0, "io1");
+
+    t_create_val();
+
+    //struct Arena *my_arena = create_arena(24);
 
     //free_arena(my_arena);
 

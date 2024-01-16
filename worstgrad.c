@@ -49,15 +49,6 @@ create_value(double data, const char *label)
     val.data = data;
     val.grad = 0.0;
 
-    // Let's not use the heap for the moment, right?
-    /* // Allocate memory for the label from the arena. */
-    /* val.label = arena_alloc(arena, strlen(label) + 1); */
-
-    /* if (val.label == NULL) { */
-    /*     memset(&val, 0, sizeof(struct Value)); */
-    /*     return val; */
-    /* } */
-
     strcpy(val.label, label);
 
     // Setting the operator to something is necessary for get_parents().
@@ -74,12 +65,6 @@ create_value(double data, const char *label)
 }
 
 void
-free_value(struct Value *val)
-{
-    free(val->label);
-}
-
-void
 set_parent(struct Value* result, int index, struct Value *parent)
 {
     // Magic number!
@@ -88,25 +73,6 @@ set_parent(struct Value* result, int index, struct Value *parent)
         result->parents[index] = parent;
     }
 }
-
-/* void */
-/* set_parent(struct Arena *arena, struct Value* result, int index, struct Value* parent) */
-/* { */
-/*     // Magic number! */
-/*     if (index >= 0 && index < 2) { */
-/*         // Allocate memory for the parents array if not done already */
-/*         if (result->parents[index] == NULL) { */
-/*             result->parents[index] = arena_alloc(arena, sizeof(struct Value*)); */
-/*             if (result->parents[index] == NULL) { */
-/*                 // Handle out-of-memory scenario if needed */
-/*                 return; */
-/*             } */
-/*         } */
-
-/*         // Set the parent using arena-allocated memory */
-/*         *((struct Value**)result->parents[index]) = parent; */
-/*     } */
-/* } */
 
 struct Value
 w_add(struct Value *v1, struct Value *v2, const char *label)
