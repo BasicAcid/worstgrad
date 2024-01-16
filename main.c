@@ -6,6 +6,8 @@ int
 main(void)
 {
     // Some values.
+    // TODO: add a way to initialize arrays of values.
+    // TODO: generate arrays explicitly or at random based on some distribution.
     struct Value a = create_value(-2, "a");
     struct Value b = create_value(3, "b");
     struct Value x1 = create_value(2.0, "x1");
@@ -39,6 +41,7 @@ main(void)
     //test_7(inputs2);
 
     // Free memory.
+    // TODO: Use an arena allocator or something.
     free_value(&a);
     free_value(&b);
     free_value(&x1);
