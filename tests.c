@@ -1,18 +1,77 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 #include <string.h>
 #include <assert.h>
 #include "main.h"
 
 void
-t_create_val()
+test_create_val()
 {
     struct Value a = create_value(-2, "a");
     a.grad = 1.0;
-
     assert(a.data == -2);
     assert(strcmp(a.label, "a") == 0);
     assert(a.grad == 1.0);
 }
+
+void
+test_add()
+{
+    struct Value a = create_value(-2, "a");
+    struct Value b = create_value(3, "b");
+    struct Value c = w_add(&a, &b, "c");
+    assert(c.data == 1);
+}
+
+void
+test_sub()
+{
+    struct Value a = create_value(-2, "a");
+    struct Value b = create_value(3, "b");
+    struct Value c = w_sub(&a, &b, "c");
+    assert(c.data == -5);
+}
+
+void
+test_mul()
+{
+    struct Value a = create_value(-2, "a");
+    struct Value b = create_value(3, "b");
+    struct Value c = w_mul(&a, &b, "c");
+    assert(c.data == -6);
+}
+
+void
+test_div()
+{
+    struct Value a = create_value(-4, "a");
+    struct Value b = create_value(2, "b");
+    struct Value c = w_div(&a, &b, "c");
+    assert(c.data == -2);
+}
+
+void
+test_tanh()
+{
+    struct Value a = create_value(2, "a");;
+    struct Value b = w_tanh(&a, "b");
+    assert(fabs(b.data - 0.964028) < 1e-6);
+}
+
+void
+test_relu()
+{
+    struct Value a = create_value(2, "a");
+    struct Value b = w_relu(&a, "b");
+
+    struct Value c = create_value(-2, "c");
+    struct Value d = w_relu(&c, "d");
+
+    assert(b.data == 2);
+    assert(d.data == 0);
+}
+
 
 /* void */
 /* test_1(struct Value a, struct Value b) */
