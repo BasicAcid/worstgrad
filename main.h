@@ -1,15 +1,23 @@
 #include <stdbool.h>
+#include <stdio.h>
 
-// TODO
-// This will create problems in the future.
+// TODO: This will create problems in the future.
 enum { max_parents = 2 };
+
+struct Arena
+{
+    size_t size;
+    char* start;
+    char* current;
+};
 
 struct Value
 {
     struct Value *parents[max_parents];
     double data;
     double grad;
-    char *label;
+    /* char *label; */
+    char label[20];
     char operator[5]; // TODO: bad...
     unsigned int visited : 1; // For topological sort.
 };
@@ -43,7 +51,11 @@ struct MLP
     struct Layer *layers;
 };
 
+struct Arena *create_arena(size_t size);
+void free_arena(struct Arena* arena);
+
 struct Value create_value(double data, const char *label);
+
 void free_value(struct Value *val);
 
 struct Value w_add(struct Value *v1, struct Value *v2, const char *label);

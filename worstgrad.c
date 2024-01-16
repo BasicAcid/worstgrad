@@ -5,6 +5,42 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+struct Arena
+*create_arena(size_t size)
+{
+    struct Arena *arena = malloc(sizeof(struct Arena));
+    arena->size = size;
+    arena->start = malloc(size);
+    arena->current = arena->start;
+    return arena;
+}
+
+void
+*arena_alloc(struct Arena *arena, size_t size)
+{
+    if(arena->current + size > arena->start + arena->size)
+    {
+        fprintf(stderr, "Arena out of memory.");
+        exit(EXIT_FAILURE);
+    }
+    void *allocated = arena->current;
+    arena->current += size;
+    return allocated;
+}
+
+void
+reset_arena(struct Arena *arena)
+{
+    arena->current = arena->start;
+}
+
+void
+free_arena(struct Arena *arena)
+{
+    free(arena->start);
+    free(arena);
+}
+
 struct Value
 create_value(double data, const char *label)
 {
@@ -13,22 +49,22 @@ create_value(double data, const char *label)
     val.data = data;
     val.grad = 0.0;
 
-    // Dynamic memory allocation for the label.
-    val.label = malloc(strlen(label) + 1);  // +1 for the null terminator.
+    // Let's not use the heap for the moment, right?
+    /* // Allocate memory for the label from the arena. */
+    /* val.label = arena_alloc(arena, strlen(label) + 1); */
 
-    if(val.label == NULL)
-    {
-        memset(&val, 0, sizeof(struct Value));
-        return val;
-    }
+    /* if (val.label == NULL) { */
+    /*     memset(&val, 0, sizeof(struct Value)); */
+    /*     return val; */
+    /* } */
+
     strcpy(val.label, label);
 
     // Setting the operator to something is necessary for get_parents().
     snprintf(val.operator, sizeof(val.operator), "root");
 
     // Magic number!
-    for(int i = 0; i < 2; i++)
-    {
+    for (int i = 0; i < 2; i++) {
         val.parents[i] = NULL;
     }
 
@@ -44,7 +80,7 @@ free_value(struct Value *val)
 }
 
 void
-set_parent(struct Value* result, int index, struct Value* parent)
+set_parent(struct Value* result, int index, struct Value *parent)
 {
     // Magic number!
     if(index >= 0 && index < 2)
@@ -52,6 +88,25 @@ set_parent(struct Value* result, int index, struct Value* parent)
         result->parents[index] = parent;
     }
 }
+
+/* void */
+/* set_parent(struct Arena *arena, struct Value* result, int index, struct Value* parent) */
+/* { */
+/*     // Magic number! */
+/*     if (index >= 0 && index < 2) { */
+/*         // Allocate memory for the parents array if not done already */
+/*         if (result->parents[index] == NULL) { */
+/*             result->parents[index] = arena_alloc(arena, sizeof(struct Value*)); */
+/*             if (result->parents[index] == NULL) { */
+/*                 // Handle out-of-memory scenario if needed */
+/*                 return; */
+/*             } */
+/*         } */
+
+/*         // Set the parent using arena-allocated memory */
+/*         *((struct Value**)result->parents[index]) = parent; */
+/*     } */
+/* } */
 
 struct Value
 w_add(struct Value *v1, struct Value *v2, const char *label)
