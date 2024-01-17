@@ -106,33 +106,61 @@ test_add_backward()
     struct Value b = create_value(-2, "b");
     struct Value c = w_add(&a, &b, "c");
 
-    c.grad = 2.0;
+    c.grad = 1.0;
 
-    // TODO: Find a way to automate this.
-    struct Stack stack;
-    int initial_capacity = 3;
-    init_stack(&stack, initial_capacity);
+    backward(&c);
 
-    dfs_to_stack(&c, &stack);
-    backward_stack(&stack);
-    print_stack(&stack);
-    cleanup_stack(&stack);
-
+    printf("%f\n" , a.grad);
+    printf("%f\n" , b.grad);
+    printf("%f\n" , c.grad);
 }
 
 void
 test_sub_backward()
 {
+    struct Value a = create_value(4, "a");
+    struct Value b = create_value(-2, "b");
+    struct Value c = w_sub(&a, &b, "c");
+
+    c.grad = 1.0;
+
+    backward(&c);
+
+    printf("%f\n" , a.grad);
+    printf("%f\n" , b.grad);
+    printf("%f\n" , c.grad);
 }
 
 void
 test_mul_backward()
 {
+    struct Value a = create_value(4, "a");
+    struct Value b = create_value(-2, "b");
+    struct Value c = w_mul(&a, &b, "c");
+
+    c.grad = 1.0;
+
+    backward(&c);
+
+    printf("%f\n" , a.grad);
+    printf("%f\n" , b.grad);
+    printf("%f\n" , c.grad);
 }
 
 void
 test_div_backward()
 {
+    struct Value a = create_value(4, "a");
+    struct Value b = create_value(-2, "b");
+    struct Value c = w_div(&a, &b, "c");
+
+    c.grad = 1.0;
+
+    backward(&c);
+
+    printf("%f\n" , a.grad);
+    printf("%f\n" , b.grad);
+    printf("%f\n" , c.grad);
 }
 
 void
@@ -150,7 +178,7 @@ test_1()
     struct Stack stack;
 
     // TODO: Find a way to automate this.
-    int initial_capacity = 100;
+    size_t initial_capacity = 100;
     init_stack(&stack, initial_capacity);
 
     dfs_to_stack(&d, &stack);

@@ -29,6 +29,9 @@ main(void)
     test_pow();
 
     test_add_backward();
+    test_sub_backward();
+    test_mul_backward();
+    test_div_backward();
 
     //test_1();
 

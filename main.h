@@ -78,7 +78,7 @@ void dfs_to_stack(struct Value *node, struct Stack *stack);
 struct Value *pop(struct Stack *stack);
 void push(struct Stack *stack, struct Value *new_value);
 struct Value *peek(struct Stack *stack);
-void init_stack(struct Stack *stack, int initial_capacity);
+void init_stack(struct Stack *stack, size_t initial_capacity);
 void cleanup_stack(struct Stack *stack);
 void gradient_descent(struct Stack *stack, double h, int n);
 void print_stack(struct Stack *stack);

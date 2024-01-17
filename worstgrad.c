@@ -379,9 +379,9 @@ print_graph(struct Value *head)
 }
 
 void
-init_stack(struct Stack *stack, int initial_capacity)
+init_stack(struct Stack *stack, size_t initial_capacity)
 {
-    size_t items_size = (long unsigned int)initial_capacity * sizeof(struct Value *);
+    size_t items_size = initial_capacity * sizeof(struct Value *);
     stack->items = malloc(items_size);
     stack->top = -1;
     stack->capacity = initial_capacity;
