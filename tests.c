@@ -72,6 +72,48 @@ test_relu()
     assert(d.data == 0);
 }
 
+void
+test_exp()
+{
+    struct Value a = create_value(2, "a");
+    struct Value b = create_value(-2, "b");
+
+    struct Value c = w_exp(&a, "c");
+    struct Value d = w_exp(&b, "d");
+
+    assert(fabs(c.data - 7.389056) < 1e-6);
+    assert(fabs(d.data - 0.135335) < 1e-6);
+}
+
+void
+test_pow()
+{
+    struct Value a = create_value(2, "a");
+    struct Value b = create_value(-2, "b");
+    struct Value c = w_pow(&a, &b, "c");
+    assert(fabs(c.data - 0.250000) < 1e-6);
+}
+
+void
+test_add_backward()
+{
+
+}
+
+void
+test_sub_backward()
+{
+}
+
+void
+test_mul_backward()
+{
+}
+
+void
+test_div_backward()
+{
+}
 
 /* void */
 /* test_1(struct Value a, struct Value b) */

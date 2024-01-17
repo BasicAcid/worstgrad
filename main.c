@@ -25,6 +25,9 @@ main(void)
     test_div();
     test_tanh();
     test_relu();
+    test_exp();
+    test_pow();
+
 
     //struct Arena *my_arena = create_arena(24);
 
