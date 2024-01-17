@@ -28,6 +28,10 @@ main(void)
     test_exp();
     test_pow();
 
+    test_add_backward();
+
+    //test_1();
+
 
     //struct Arena *my_arena = create_arena(24);
 

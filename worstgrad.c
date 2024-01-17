@@ -183,10 +183,10 @@ void
 add_backward(struct Value *result)
 {
     if(result->parents[0] != NULL)
-        result->parents[0]->grad += result->grad;
+        result->parents[0]->grad = result->grad;
 
     if(result->parents[1] != NULL)
-        result->parents[1]->grad += result->grad;
+        result->parents[1]->grad = result->grad;
 }
 
 void
@@ -466,7 +466,7 @@ forward_stack(struct Stack *stack, double h)
 }
 
 void
-grandient_descent(struct Stack *stack, double h, int n)
+gradient_descent(struct Stack *stack, double h, int n)
 {
     for (int i = 0; i < n; ++i)
     {

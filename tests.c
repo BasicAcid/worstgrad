@@ -94,9 +94,29 @@ test_pow()
     assert(fabs(c.data - 0.250000) < 1e-6);
 }
 
+void test_stack()
+{
+
+}
+
 void
 test_add_backward()
 {
+    struct Value a = create_value(4, "a");
+    struct Value b = create_value(-2, "b");
+    struct Value c = w_add(&a, &b, "c");
+
+    c.grad = 2.0;
+
+    // TODO: Find a way to automate this.
+    struct Stack stack;
+    int initial_capacity = 3;
+    init_stack(&stack, initial_capacity);
+
+    dfs_to_stack(&c, &stack);
+    backward_stack(&stack);
+    print_stack(&stack);
+    cleanup_stack(&stack);
 
 }
 
@@ -115,35 +135,39 @@ test_div_backward()
 {
 }
 
-/* void */
-/* test_1(struct Value a, struct Value b) */
-/* { */
-/*     struct Value d = w_sub(&a, &b, "d"); */
-/*     struct Value g = w_tanh(&d, "g"); */
+void
+test_1()
+{
+    struct Value a = create_value(2, "a");
+    struct Value b = create_value(-2, "b");
+    struct Value c = w_sub(&a, &b, "c");
+    struct Value d = w_tanh(&c, "d");
 
-/*     g.grad = 1.0; */
+    printf("%f\n" , d.data);
 
-/*     struct Stack stack; */
+    d.grad = 1.0;
 
-/*     // Find a way to automate this. */
-/*     int initial_capacity = 100; */
-/*     init_stack(&stack, initial_capacity); */
+    struct Stack stack;
 
-/*     dfs_to_stack(&g, &stack); */
+    // TODO: Find a way to automate this.
+    int initial_capacity = 100;
+    init_stack(&stack, initial_capacity);
 
-/*     double h = 0.001; */
+    dfs_to_stack(&d, &stack);
 
-/*     grandient_descent(&stack, h, 100); */
+    double h = 0.001;
 
-/*     backward_stack(&stack); */
+    gradient_descent(&stack, h, 100);
 
-/*     print_stack(&stack); */
+    backward_stack(&stack);
 
-/*     cleanup_stack(&stack); */
+    print_stack(&stack);
 
-/*     free_value(&d); */
-/*     free_value(&g); */
-/* } */
+    cleanup_stack(&stack);
+
+    /* free_value(&d); */
+    /* free_value(&g); */
+}
 
 /* void */
 /* test_2(struct Value a, struct Value b) */

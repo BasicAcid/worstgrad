@@ -80,7 +80,7 @@ void push(struct Stack *stack, struct Value *new_value);
 struct Value *peek(struct Stack *stack);
 void init_stack(struct Stack *stack, int initial_capacity);
 void cleanup_stack(struct Stack *stack);
-void grandient_descent(struct Stack *stack, double h, int n);
+void gradient_descent(struct Stack *stack, double h, int n);
 void print_stack(struct Stack *stack);
 
 void free_neuron(struct Neuron *neuron);
@@ -97,7 +97,7 @@ void forward_mlp(struct MLP *mlp, struct Value inputs[]);
 void destroy_mlp(struct MLP *mlp);
 
 // Tests
-void test_1(struct Value a, struct Value b);
+void test_1();
 void test_2(struct Value a, struct Value b);
 void test_3(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b);
 void test_4(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b, struct Value z);
