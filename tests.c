@@ -144,14 +144,11 @@ test_div_backward()
     struct Value a = create_value(4, "a");
     struct Value b = create_value(-2, "b");
     struct Value c = w_div(&a, &b, "c");
-
     c.grad = 1.0;
-
     backward(&c);
 
-    printf("%f\n" , a.grad);
-    printf("%f\n" , b.grad);
-    printf("%f\n" , c.grad);
+    assert(a.grad == (1.0 / b.data));
+    assert(b.grad == (-a.data / (b.data * b.data)));
 }
 
 void

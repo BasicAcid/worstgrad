@@ -217,7 +217,7 @@ div_backward(struct Value *result)
         result->parents[0]->grad = 1 / result->parents[1]->data;
 
     if(result->parents[1] != NULL)
-        result->parents[1]->grad = result->parents[0]->data / pow(result->parents[1]->data, 2);
+        result->parents[1]->grad -= result->parents[0]->data / pow(result->parents[1]->data, 2);
 }
 
 void
