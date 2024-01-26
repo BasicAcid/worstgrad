@@ -94,11 +94,6 @@ test_pow()
     assert(fabs(c.data - 0.250000) < 1e-6);
 }
 
-void test_stack()
-{
-
-}
-
 void
 test_add_backward()
 {

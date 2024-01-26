@@ -97,6 +97,20 @@ void forward_mlp(struct MLP *mlp, struct Value inputs[]);
 void destroy_mlp(struct MLP *mlp);
 
 // Tests
+void test_create_val();
+void test_add();
+void test_sub();
+void test_mul();
+void test_div();
+void test_tanh();
+void test_relu();
+void test_exp();
+void test_pow();
+void test_add_backward();
+void test_sub_backward();
+void test_mul_backward();
+void test_div_backward();
+
 void test_1();
 void test_2(struct Value a, struct Value b);
 void test_3(struct Value x1, struct Value x2, struct Value w1, struct Value w2, struct Value b);
