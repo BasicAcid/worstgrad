@@ -170,6 +170,26 @@ test_exp_backward()
     assert(fabs(a.grad - 0.135335) < 1e-6);
 }
 
+void
+test_relu_backward()
+{
+    struct Value a = create_value(2, "a");
+    struct Value b = w_relu(&a, "b");
+
+    struct Value c = create_value(-2, "c");
+    struct Value d = w_relu(&c, "d");
+
+    b.grad = 1.0;
+    d.grad = 1.0;
+
+    backward(&b);
+    backward(&d);
+    /* printf("%f\n" , a.grad); */
+    /* printf("%f\n" , c.grad); */
+    assert(a.grad == 2);
+    assert(c.grad == 0);
+}
+
 
 
 void

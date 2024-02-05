@@ -239,8 +239,6 @@ relu_backward(struct Value *result)
 {
     if(result->data > 0)
         result->parents[0]->grad = result->data * result->grad;
-    else
-        result->parents[0]->grad = result->grad;
 }
 
 void

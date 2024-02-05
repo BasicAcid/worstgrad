@@ -113,6 +113,7 @@ void test_mul_backward();
 void test_div_backward();
 void test_tanh_backward();
 void test_exp_backward();
+void test_relu_backward();
 
 void test_1();
 void test_2(struct Value a, struct Value b);

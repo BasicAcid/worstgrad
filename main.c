@@ -36,7 +36,7 @@ main(void)
     test_div_backward();
     test_tanh_backward();
     test_exp_backward();
-
+    test_relu_backward();
 
 
 
