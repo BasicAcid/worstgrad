@@ -18,6 +18,7 @@ main(void)
     /* struct Value z = create_value(2.0, "z"); */
     /* struct Value io1 = create_value(1.0, "io1"); */
 
+    // Test basic functions.
     test_create_val();
     test_add();
     test_sub();
@@ -28,13 +29,15 @@ main(void)
     test_exp();
     test_pow();
 
+    // Test backward functions.
     test_add_backward();
     test_sub_backward();
     test_mul_backward();
     test_div_backward();
     test_tanh_backward();
+    test_exp_backward();
 
-    //test_1();
+
 
 
     //struct Arena *my_arena = create_arena(24);
