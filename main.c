@@ -32,6 +32,7 @@ main(void)
     test_sub_backward();
     test_mul_backward();
     test_div_backward();
+    test_tanh_backward();
 
     //test_1();
 

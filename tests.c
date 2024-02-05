@@ -147,6 +147,17 @@ test_div_backward()
 }
 
 void
+test_tanh_backward()
+{
+    struct Value a = create_value(4, "a");
+    struct Value b = w_tanh(&a, "b");
+    b.grad = 1.0;
+    backward(&b);
+
+    assert(fabs(a.grad - 0.001341) < 1e-6);
+}
+
+void
 test_1()
 {
     struct Value a = create_value(2, "a");

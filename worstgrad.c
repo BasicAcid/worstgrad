@@ -54,10 +54,9 @@ create_value(double data, const char *label)
     // Setting the operator to something is necessary for get_parents().
     snprintf(val.operator, sizeof(val.operator), "root");
 
-    // Magic number!
-    for (int i = 0; i < 2; i++) {
+    // Set the two parents to null (binop).
+    for(int i = 0; i < 2; i++)
         val.parents[i] = NULL;
-    }
 
     val.visited = false;
 
@@ -67,11 +66,9 @@ create_value(double data, const char *label)
 void
 set_parent(struct Value* result, int index, struct Value *parent)
 {
-    // Magic number!
+    // Between one (unary op like tanh) or two parents.
     if(index >= 0 && index < 2)
-    {
         result->parents[index] = parent;
-    }
 }
 
 struct Value
@@ -110,9 +107,6 @@ w_mul(struct Value *v1, struct Value *v2, const char *label)
 struct Value
 w_div(struct Value *v1, struct Value *v2, const char *label)
 {
-    // Which is better?
-    // struct Value result = create_value(v1->data / v2->data, label);
-
     struct Value ir1 = create_value(-1, "ir1");
     struct Value ir2 = w_pow(v2, &ir1, "ir2");
     struct Value result = create_value(v1->data * ir2.data, label);
