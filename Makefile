@@ -31,13 +31,7 @@ all: build
 
 build: $(TARGET)
 
-debug: $(DEBUG_TARGET)
-
 $(TARGET): $(OBJS) main.h
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
-
-$(DEBUG_TARGET): CFLAGS += $(DEBUG_FLAGS)
-$(DEBUG_TARGET): $(OBJS) main.h
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.c main.h
@@ -50,7 +44,7 @@ tags:
 	etags main.c worstgrad.c neuron.c layer.c main.h tests.c
 
 clean:
-	rm -rf *.o $(BIN_DIR)/*.o $(TARGET) $(DEBUG_TARGET)
+	rm -rf *.o $(BIN_DIR)/*.o $(TARGET)
 
 cppcheck:
 	cppcheck --enable=all --inconclusive --force --suppress=unusedFunction .
