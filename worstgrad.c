@@ -296,65 +296,65 @@ get_parents(struct Value *v) {
 
 
 // Any use?
-struct Value
-*get_parents2(struct Value *v)
-{
-    struct Value *list;
+/* struct Value */
+/* *get_parents2(struct Value *v) */
+/* { */
+/*     struct Value *list; */
 
-    list = malloc(2 * sizeof(struct Value));
+/*     list = malloc(2 * sizeof(struct Value)); */
 
-    if(strcmp("+", v->operator) == 0)
-    {
-        for(int i = 0; i < 2; i++)
-            list[i] = *v->parents[i];
-    }
+/*     if(strcmp("+", v->operator) == 0) */
+/*     { */
+/*         for(int i = 0; i < 2; i++) */
+/*             list[i] = *v->parents[i]; */
+/*     } */
 
-    else if(strcmp("-", v->operator) == 0)
-    {
-        for(int i = 0; i < 2; i++)
-            list[i] = *v->parents[i];
-    }
-    else if(strcmp("*", v->operator) == 0)
-    {
-        for(int i = 0; i < 2; i++)
-            list[i] = *v->parents[i];
-    }
-    else if(strcmp("/", v->operator) == 0)
-    {
-        for(int i = 0; i < 2; i++)
-            list[i] = *v->parents[i];
-    }
-    else if(strcmp("tanh", v->operator) == 0)
-    {
-        for(int i = 0; i < 1; i++)
-            list[i] = *v->parents[i];
-    }
-    else if(strcmp("relu", v->operator) == 0)
-    {
-        for(int i = 0; i < 1; i++)
-            list[i] = *v->parents[i];
-    }
-    else if(strcmp("exp", v->operator) == 0)
-    {
-        for(int i = 0; i < 1; i++)
-            list[i] = *v->parents[i];
-    }
-    else if(strcmp("pow", v->operator) == 0)
-    {
-        for(int i = 0; i < 2; i++)
-            list[i] = *v->parents[i];
-    }
-    else
-    {
-        return NULL;
-    }
-    return list;
-}
+/*     else if(strcmp("-", v->operator) == 0) */
+/*     { */
+/*         for(int i = 0; i < 2; i++) */
+/*             list[i] = *v->parents[i]; */
+/*     } */
+/*     else if(strcmp("*", v->operator) == 0) */
+/*     { */
+/*         for(int i = 0; i < 2; i++) */
+/*             list[i] = *v->parents[i]; */
+/*     } */
+/*     else if(strcmp("/", v->operator) == 0) */
+/*     { */
+/*         for(int i = 0; i < 2; i++) */
+/*             list[i] = *v->parents[i]; */
+/*     } */
+/*     else if(strcmp("tanh", v->operator) == 0) */
+/*     { */
+/*         for(int i = 0; i < 1; i++) */
+/*             list[i] = *v->parents[i]; */
+/*     } */
+/*     else if(strcmp("relu", v->operator) == 0) */
+/*     { */
+/*         for(int i = 0; i < 1; i++) */
+/*             list[i] = *v->parents[i]; */
+/*     } */
+/*     else if(strcmp("exp", v->operator) == 0) */
+/*     { */
+/*         for(int i = 0; i < 1; i++) */
+/*             list[i] = *v->parents[i]; */
+/*     } */
+/*     else if(strcmp("pow", v->operator) == 0) */
+/*     { */
+/*         for(int i = 0; i < 2; i++) */
+/*             list[i] = *v->parents[i]; */
+/*     } */
+/*     else */
+/*     { */
+/*         return NULL; */
+/*     } */
+/*     return list; */
+/* } */
 
 void
 print_node(struct Value *v)
 {
-    printf("Data: %f, Label: %s, Grad: %f, Op: %s, Vis: %d\n", v->data, v->label, v->grad, v->operator, v->visited);
+    printf("Data: %f, Label: %s, Grad: %f, Op: %s, Vis: %u\n", v->data, v->label, v->grad, v->operator, v->visited);
 }
 
 void
