@@ -14,7 +14,6 @@ CFLAGS := -Wall \
           -fsanitize=undefined \
           -g
 
-DEBUG_FLAGS = -O0 -DDEBUG
 LIBS = -lm
 
 # SRCS = main.c worstgrad.c neuron.c layer.c mlp.c tests.c
@@ -23,9 +22,8 @@ OBJS = $(SRCS:.c=.o)
 
 BIN_DIR = ./bin
 TARGET = $(BIN_DIR)/main
-DEBUG_TARGET = $(BIN_DIR)/debug_main
 
-.PHONY: all build debug run tags clean
+.PHONY: all build run tags clean
 
 all: build
 
