@@ -358,17 +358,21 @@ print_node(struct Value *v)
 }
 
 void
-print_graph(struct Value *head)
+get_graph_size(struct Value *node, size_t *graph_size)
 {
-    struct Value *current = head;
+    node->visited = true;
 
-    while(current != NULL)
+    for(int i = 0; i < 2; i++)
     {
-        printf("%lf -> ", current->data);
-        current = current->parents[1];
+        if(node->parents[i] != NULL && !node->parents[i]->visited)
+        {
+            get_graph_size(node->parents[i], graph_size);
+        }
     }
-    printf("NULL\n");
+    printf("%s\n", node->label);
+    (*graph_size)++;
 }
+
 
 void
 init_stack(struct Stack *stack, size_t initial_capacity)
@@ -384,7 +388,7 @@ push(struct Stack *stack, struct Value *new_value)
 {
     if(stack->top == stack->capacity - 1)
     {
-        stack->capacity = stack->capacity * 2; // Growth (too much?)
+        stack->capacity = stack->capacity * 2;
         size_t items_size = (long unsigned int)stack->capacity * sizeof(struct Value *);
         stack->items = (struct Value **)realloc(stack->items, items_size);
     }

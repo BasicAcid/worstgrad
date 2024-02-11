@@ -16,9 +16,8 @@ struct Value
     struct Value *parents[max_parents];
     double data;
     double grad;
-    /* char *label; */
     char label[20];
-    char operator[5]; // TODO: bad...
+    char operator[5];
     unsigned int visited : 1; // For topological sort.
 };
 

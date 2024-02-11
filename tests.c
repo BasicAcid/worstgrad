@@ -165,8 +165,6 @@ test_exp_backward()
     b.grad = 1.0;
     backward(&b);
 
-    //printf("%f\n" , a.grad);
-
     assert(fabs(a.grad - 0.135335) < 1e-6);
 }
 
@@ -184,13 +182,10 @@ test_relu_backward()
 
     backward(&b);
     backward(&d);
-    /* printf("%f\n" , a.grad); */
-    /* printf("%f\n" , c.grad); */
+
     assert(a.grad == 2);
     assert(c.grad == 0);
 }
-
-
 
 void
 test_1()
@@ -200,7 +195,9 @@ test_1()
     struct Value c = w_sub(&a, &b, "c");
     struct Value d = w_tanh(&c, "d");
 
-    printf("%f\n" , d.data);
+    size_t graph_size = 0;
+    get_graph_size(&d, &graph_size);
+    printf("%d\n", graph_size);
 
     d.grad = 1.0;
 
@@ -221,9 +218,6 @@ test_1()
     print_stack(&stack);
 
     cleanup_stack(&stack);
-
-    /* free_value(&d); */
-    /* free_value(&g); */
 }
 
 /* void */

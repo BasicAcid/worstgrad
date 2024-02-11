@@ -38,7 +38,7 @@ main(void)
     test_exp_backward();
     test_relu_backward();
 
-
+    test_1();
 
     //struct Arena *my_arena = create_arena(24);
 
