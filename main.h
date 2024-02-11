@@ -81,6 +81,7 @@ void init_stack(struct Stack *stack, size_t initial_capacity);
 void cleanup_stack(struct Stack *stack);
 void gradient_descent(struct Stack *stack, double h, int n);
 void print_stack(struct Stack *stack);
+void get_graph_size(struct Value *node, size_t *graph_size);
 
 void free_neuron(struct Neuron *neuron);
 struct Neuron *create_neuron(int n_weights);

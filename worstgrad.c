@@ -369,7 +369,6 @@ get_graph_size(struct Value *node, size_t *graph_size)
             get_graph_size(node->parents[i], graph_size);
         }
     }
-    printf("%s\n", node->label);
     (*graph_size)++;
 }
 

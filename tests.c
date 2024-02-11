@@ -195,16 +195,14 @@ test_1()
     struct Value c = w_sub(&a, &b, "c");
     struct Value d = w_tanh(&c, "d");
 
+    d.grad = 1.0;
+
     size_t graph_size = 0;
     get_graph_size(&d, &graph_size);
-    printf("%d\n", graph_size);
-
-    d.grad = 1.0;
 
     struct Stack stack;
 
-    // TODO: Find a way to automate this.
-    size_t initial_capacity = 100;
+    size_t initial_capacity = graph_size;
     init_stack(&stack, initial_capacity);
 
     dfs_to_stack(&d, &stack);
