@@ -40,6 +40,8 @@ main(void)
 
     test_1();
 
+    test_node();
+
     //struct Arena *my_arena = create_arena(24);
 
     //free_arena(my_arena);

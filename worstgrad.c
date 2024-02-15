@@ -5,40 +5,36 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-struct Arena
-*create_arena(size_t size)
+Node
+*create_node(char name[20], Operation op, size_t num_inputs, Node **inputs)
 {
-    struct Arena *arena = malloc(sizeof(struct Arena));
-    arena->size = size;
-    arena->start = malloc(size);
-    arena->current = arena->start;
-    return arena;
+    Node *node = malloc(sizeof(Node));
+    strncpy(node->name, name, 20 - 1);
+    node->name[20 - 1] = '\0'; // Ensure null termination
+    node->op = op;
+    node->inputs = inputs;
+    node->num_inputs = num_inputs;
+    node->grad = 0.0;
+    return node;
 }
 
+
 void
-*arena_alloc(struct Arena *arena, size_t size)
+forward_propagation(Node *node)
 {
-    if(arena->current + size > arena->start + arena->size)
-    {
-        fprintf(stderr, "Arena out of memory.");
-        exit(EXIT_FAILURE);
+    switch (node->op) {
+        case VALUE:
+            break;
+        case ADD:
+            node->value = node->inputs[0]->value + node->inputs[1]->value;
+            break;
+        case SUB:
+            node->value = node->inputs[0]->value - node->inputs[1]->value;
+            break;
+        case MUL:
+            node->value = node->inputs[0]->value * node->inputs[1]->value;
+            break;
     }
-    void *allocated = arena->current;
-    arena->current += size;
-    return allocated;
-}
-
-void
-reset_arena(struct Arena *arena)
-{
-    arena->current = arena->start;
-}
-
-void
-free_arena(struct Arena *arena)
-{
-    free(arena->start);
-    free(arena);
 }
 
 struct Value
@@ -372,7 +368,6 @@ get_graph_size(struct Value *node, size_t *graph_size)
     (*graph_size)++;
 }
 
-
 void
 init_stack(struct Stack *stack, size_t initial_capacity)
 {
@@ -478,3 +473,40 @@ print_stack(struct Stack *stack)
         print_node(stack->items[i]);
     }
 }
+
+// Not used for the moment.
+/* struct Arena */
+/* *create_arena(size_t size) */
+/* { */
+/*     struct Arena *arena = malloc(sizeof(struct Arena)); */
+/*     arena->size = size; */
+/*     arena->start = malloc(size); */
+/*     arena->current = arena->start; */
+/*     return arena; */
+/* } */
+
+/* void */
+/* *arena_alloc(struct Arena *arena, size_t size) */
+/* { */
+/*     if(arena->current + size > arena->start + arena->size) */
+/*     { */
+/*         fprintf(stderr, "Arena out of memory."); */
+/*         exit(EXIT_FAILURE); */
+/*     } */
+/*     void *allocated = arena->current; */
+/*     arena->current += size; */
+/*     return allocated; */
+/* } */
+
+/* void */
+/* reset_arena(struct Arena *arena) */
+/* { */
+/*     arena->current = arena->start; */
+/* } */
+
+/* void */
+/* free_arena(struct Arena *arena) */
+/* { */
+/*     free(arena->start); */
+/*     free(arena); */
+/* } */

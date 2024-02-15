@@ -16,7 +16,7 @@ CFLAGS := -Wall \
 
 LIBS = -lm
 
-# SRCS = main.c worstgrad.c neuron.c layer.c mlp.c tests.c
+# SRCS = main.c worstgrad.c neuron.c layer.c tests.c
 SRCS = main.c worstgrad.c tests.c graph.c
 OBJS = $(SRCS:.c=.o)
 

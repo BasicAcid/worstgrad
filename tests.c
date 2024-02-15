@@ -213,9 +213,17 @@ test_1()
 
     backward_stack(&stack);
 
-    print_stack(&stack);
+    //print_stack(&stack);
 
     cleanup_stack(&stack);
+}
+
+void
+test_node()
+{
+    Node *a = create_node("a", VALUE, 0, NULL);
+    /* Node *b = create_node("b", VALUE, 0, NULL); */
+    /* Node *c = create_node("c", SUB, 2, (Node*[]){a, b}); */
 }
 
 /* void */

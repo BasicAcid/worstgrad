@@ -21,6 +21,24 @@ struct Value
     unsigned int visited : 1; // For topological sort.
 };
 
+// Define operations enum
+typedef enum {
+    VALUE,
+    ADD,
+    SUB,
+    MUL
+} Operation;
+
+typedef struct Node
+{
+    char name[20];
+    double value;
+    double grad;
+    Operation op;
+    struct Node **inputs;
+    size_t num_inputs;
+} Node;
+
 struct Stack
 {
     struct Value **items;
@@ -69,6 +87,9 @@ struct Value w_pow(struct Value *v1, struct Value *v2, const char *label);
 void get_parents(struct Value *v);
 struct Value *get_parents2(struct Value *v);
 void print_node(struct Value *v);
+
+Node* create_node(char name[20], Operation op, size_t num_inputs, Node **inputs);
+void forward_propagation(Node *node);
 
 void backward(struct Value *result);
 void backward_stack(struct Stack *stack);
