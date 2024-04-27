@@ -6,7 +6,7 @@ enum { max_parents = 2 };
 
 struct Value
 {
-    struct Value *parents[max_parents];
+    struct Value* parents[max_parents];
     double data;
     double grad;
     char label[20];
@@ -21,16 +21,6 @@ typedef enum {
     SUB,
     MUL
 } Operation;
-
-typedef struct Node
-{
-    char name[20];
-    double value;
-    double grad;
-    Operation op;
-    struct Node **inputs;
-    size_t num_inputs;
-} Node;
 
 struct Stack
 {
@@ -56,9 +46,6 @@ void get_parents(struct Value *v);
 struct Value *get_parents2(struct Value *v);
 void print_node(struct Value *v);
 
-Node* create_node(char name[20], Operation op, size_t num_inputs, Node **inputs);
-void forward_propagation(Node *node);
-
 void backward(struct Value *result);
 void backward_stack(struct Stack *stack);
 void forward_stack(struct Stack *stack, double h);
@@ -66,11 +53,11 @@ void dfs_to_stack(struct Value *node, struct Stack *stack);
 struct Value *pop(struct Stack *stack);
 void push(struct Stack *stack, struct Value *new_value);
 struct Value *peek(struct Stack *stack);
-void init_stack(struct Stack *stack, int initial_capacity);
+void init_stack(struct Stack *stack, size_t initial_capacity);
 void cleanup_stack(struct Stack *stack);
 void gradient_descent(struct Stack *stack, double h, int n);
 void print_stack(struct Stack *stack);
-void get_graph_size(struct Value *node, size_t *graph_size);
+size_t get_graph_size(struct Value *node, size_t *graph_size);
 
 // Tests
 void test_create_val();

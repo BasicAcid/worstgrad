@@ -200,20 +200,22 @@ test_1()
     size_t graph_size = 0;
     get_graph_size(&d, &graph_size);
 
-    struct Stack stack;
+    printf("%d\n", graph_size);
 
-    size_t initial_capacity = graph_size;
-    init_stack(&stack, initial_capacity);
+    /* struct Stack stack; */
 
-    dfs_to_stack(&d, &stack);
+    /* size_t initial_capacity = graph_size; */
+    /* init_stack(&stack, initial_capacity); */
 
-    double h = 0.001;
+    /* dfs_to_stack(&d, &stack); */
 
-    gradient_descent(&stack, h, 100);
+    /* double h = 0.001; */
 
-    backward_stack(&stack);
+    /* gradient_descent(&stack, h, 100); */
 
-    //print_stack(&stack);
+    /* backward_stack(&stack); */
 
-    cleanup_stack(&stack);
+    /* //print_stack(&stack); */
+
+    /* cleanup_stack(&stack); */
 }

@@ -289,91 +289,34 @@ get_parents(struct Value *v) {
     }
 }
 
-
-// Any use?
-/* struct Value */
-/* *get_parents2(struct Value *v) */
-/* { */
-/*     struct Value *list; */
-
-/*     list = malloc(2 * sizeof(struct Value)); */
-
-/*     if(strcmp("+", v->operator) == 0) */
-/*     { */
-/*         for(int i = 0; i < 2; i++) */
-/*             list[i] = *v->parents[i]; */
-/*     } */
-
-/*     else if(strcmp("-", v->operator) == 0) */
-/*     { */
-/*         for(int i = 0; i < 2; i++) */
-/*             list[i] = *v->parents[i]; */
-/*     } */
-/*     else if(strcmp("*", v->operator) == 0) */
-/*     { */
-/*         for(int i = 0; i < 2; i++) */
-/*             list[i] = *v->parents[i]; */
-/*     } */
-/*     else if(strcmp("/", v->operator) == 0) */
-/*     { */
-/*         for(int i = 0; i < 2; i++) */
-/*             list[i] = *v->parents[i]; */
-/*     } */
-/*     else if(strcmp("tanh", v->operator) == 0) */
-/*     { */
-/*         for(int i = 0; i < 1; i++) */
-/*             list[i] = *v->parents[i]; */
-/*     } */
-/*     else if(strcmp("relu", v->operator) == 0) */
-/*     { */
-/*         for(int i = 0; i < 1; i++) */
-/*             list[i] = *v->parents[i]; */
-/*     } */
-/*     else if(strcmp("exp", v->operator) == 0) */
-/*     { */
-/*         for(int i = 0; i < 1; i++) */
-/*             list[i] = *v->parents[i]; */
-/*     } */
-/*     else if(strcmp("pow", v->operator) == 0) */
-/*     { */
-/*         for(int i = 0; i < 2; i++) */
-/*             list[i] = *v->parents[i]; */
-/*     } */
-/*     else */
-/*     { */
-/*         return NULL; */
-/*     } */
-/*     return list; */
-/* } */
-
 void
-print_node(struct Value *v)
-{
+print_node(struct Value *v) {
     printf("Data: %f, Label: %s, Grad: %f, Op: %s, Vis: %u\n", v->data, v->label, v->grad, v->operator, v->visited);
 }
 
-void
+size_t
 get_graph_size(struct Value *node, size_t *graph_size)
 {
     node->visited = true;
-
-    for(int i = 0; i < 2; i++)
-    {
-        if(node->parents[i] != NULL && !node->parents[i]->visited)
-        {
+    
+    for (int i = 0; i < 2; i++) {
+        if (node->parents[i] != NULL && !node->parents[i]->visited) {
             get_graph_size(node->parents[i], graph_size);
         }
     }
-    (*graph_size)++;
+
+    //(*graph_size)++;
+
+    return *graph_size++;
 }
 
 void
-init_stack(struct Stack *stack, int initial_capacity)
+init_stack(struct Stack *stack, size_t initial_capacity)
 {
     int items_size = initial_capacity * sizeof(struct Value *);
     stack->items = malloc(items_size);
-    stack->top = -1;
-    stack->capacity = initial_capacity;
+    /* stack->top = -1; */
+    /* stack->capacity = initial_capacity; */
 }
 
 void
@@ -424,13 +367,11 @@ dfs_to_stack(struct Value *node, struct Stack *stack)
 {
     node->visited = true;
 
-    for(int i = 0; i < 2; i++)
-    {
-        if(node->parents[i] != NULL && !node->parents[i]->visited)
-        {
+    for (int i = 0; i < 2; i++) {
+        if (node->parents[i] != NULL && !node->parents[i]->visited) {
             dfs_to_stack(node->parents[i], stack);
         }
-   }
+    }
     push(stack, node);
 }
 
