@@ -16,14 +16,13 @@ CFLAGS := -Wall \
 
 LIBS = -lm
 
-# SRCS = main.c worstgrad.c neuron.c layer.c tests.c
-SRCS = main.c worstgrad.c tests.c graph.c
+SRCS = main.c worstgrad.c tests.c
 OBJS = $(SRCS:.c=.o)
 
 BIN_DIR = ./bin
 TARGET = $(BIN_DIR)/main
 
-.PHONY: all build run tags clean
+.PHONY: all build run clean
 
 all: build
 
@@ -37,9 +36,6 @@ $(TARGET): $(OBJS) main.h
 
 run: build
 	$(TARGET)
-
-tags:
-	etags main.c worstgrad.c neuron.c layer.c main.h tests.c
 
 clean:
 	rm -rf *.o $(BIN_DIR)/*.o $(TARGET)

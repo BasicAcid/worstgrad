@@ -18,7 +18,6 @@ Node
     return node;
 }
 
-
 void
 forward_propagation(Node *node)
 {
@@ -369,9 +368,9 @@ get_graph_size(struct Value *node, size_t *graph_size)
 }
 
 void
-init_stack(struct Stack *stack, size_t initial_capacity)
+init_stack(struct Stack *stack, int initial_capacity)
 {
-    size_t items_size = initial_capacity * sizeof(struct Value *);
+    int items_size = initial_capacity * sizeof(struct Value *);
     stack->items = malloc(items_size);
     stack->top = -1;
     stack->capacity = initial_capacity;
@@ -473,40 +472,3 @@ print_stack(struct Stack *stack)
         print_node(stack->items[i]);
     }
 }
-
-// Not used for the moment.
-/* struct Arena */
-/* *create_arena(size_t size) */
-/* { */
-/*     struct Arena *arena = malloc(sizeof(struct Arena)); */
-/*     arena->size = size; */
-/*     arena->start = malloc(size); */
-/*     arena->current = arena->start; */
-/*     return arena; */
-/* } */
-
-/* void */
-/* *arena_alloc(struct Arena *arena, size_t size) */
-/* { */
-/*     if(arena->current + size > arena->start + arena->size) */
-/*     { */
-/*         fprintf(stderr, "Arena out of memory."); */
-/*         exit(EXIT_FAILURE); */
-/*     } */
-/*     void *allocated = arena->current; */
-/*     arena->current += size; */
-/*     return allocated; */
-/* } */
-
-/* void */
-/* reset_arena(struct Arena *arena) */
-/* { */
-/*     arena->current = arena->start; */
-/* } */
-
-/* void */
-/* free_arena(struct Arena *arena) */
-/* { */
-/*     free(arena->start); */
-/*     free(arena); */
-/* } */
