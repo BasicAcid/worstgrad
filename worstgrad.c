@@ -5,36 +5,36 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-Node
-*create_node(char name[20], Operation op, size_t num_inputs, Node **inputs)
-{
-    Node *node = malloc(sizeof(Node));
-    strncpy(node->name, name, 20 - 1);
-    node->name[20 - 1] = '\0'; // Ensure null termination
-    node->op = op;
-    node->inputs = inputs;
-    node->num_inputs = num_inputs;
-    node->grad = 0.0;
-    return node;
-}
+/* Node */
+/* *create_node(char name[20], Operation op, size_t num_inputs, Node **inputs) */
+/* { */
+/*     Node *node = malloc(sizeof(Node)); */
+/*     strncpy(node->name, name, 20 - 1); */
+/*     node->name[20 - 1] = '\0'; // Ensure null termination */
+/*     node->op = op; */
+/*     node->inputs = inputs; */
+/*     node->num_inputs = num_inputs; */
+/*     node->grad = 0.0; */
+/*     return node; */
+/* } */
 
-void
-forward_propagation(Node *node)
-{
-    switch (node->op) {
-        case VALUE:
-            break;
-        case ADD:
-            node->value = node->inputs[0]->value + node->inputs[1]->value;
-            break;
-        case SUB:
-            node->value = node->inputs[0]->value - node->inputs[1]->value;
-            break;
-        case MUL:
-            node->value = node->inputs[0]->value * node->inputs[1]->value;
-            break;
-    }
-}
+/* void */
+/* forward_propagation(Node *node) */
+/* { */
+/*     switch (node->op) { */
+/*         case VALUE: */
+/*             break; */
+/*         case ADD: */
+/*             node->value = node->inputs[0]->value + node->inputs[1]->value; */
+/*             break; */
+/*         case SUB: */
+/*             node->value = node->inputs[0]->value - node->inputs[1]->value; */
+/*             break; */
+/*         case MUL: */
+/*             node->value = node->inputs[0]->value * node->inputs[1]->value; */
+/*             break; */
+/*     } */
+/* } */
 
 struct Value
 create_value(double data, const char *label)
@@ -298,7 +298,7 @@ size_t
 get_graph_size(struct Value *node, size_t *graph_size)
 {
     node->visited = true;
-    
+
     for (int i = 0; i < 2; i++) {
         if (node->parents[i] != NULL && !node->parents[i]->visited) {
             get_graph_size(node->parents[i], graph_size);
@@ -311,32 +311,32 @@ get_graph_size(struct Value *node, size_t *graph_size)
 }
 
 void
-init_stack(struct Stack *stack, size_t initial_capacity)
+init_stack(struct Stack* stack, size_t initial_capacity)
 {
-    int items_size = initial_capacity * sizeof(struct Value *);
+    size_t items_size = initial_capacity * sizeof(struct Value*);
     stack->items = malloc(items_size);
-    /* stack->top = -1; */
-    /* stack->capacity = initial_capacity; */
+    stack->top = 0;
+    stack->capacity = initial_capacity;
 }
 
 void
 push(struct Stack *stack, struct Value *new_value)
 {
-    if(stack->top == stack->capacity - 1)
+    if (stack->top == stack->capacity) // Remove -1 from the comparison
     {
-        stack->capacity = stack->capacity * 2;
-        size_t items_size = (long unsigned int)stack->capacity * sizeof(struct Value *);
-        stack->items = (struct Value **)realloc(stack->items, items_size);
+        stack->capacity *= 2;
+        size_t items_size = stack->capacity * sizeof(struct Value *);
+        stack->items = realloc(stack->items, items_size);
     }
 
-    stack->top++;
     stack->items[stack->top] = new_value;
+    stack->top++;
 }
 
 struct Value
 *pop(struct Stack *stack)
 {
-    if(stack->top == -1)
+    if(stack->top == 0)
         return NULL;
 
     struct Value *popped = stack->items[stack->top];
@@ -348,7 +348,7 @@ struct Value
 struct Value
 *peek(struct Stack *stack)
 {
-    if(stack->top == -1)
+    if(stack->top == 0)
         return NULL;
 
     struct Value *peeked = stack->items[stack->top];
@@ -378,8 +378,7 @@ dfs_to_stack(struct Value *node, struct Stack *stack)
 void
 backward_stack(struct Stack *stack)
 {
-    for(int i = stack->top; i >= 0; i--)
-    {
+    for (size_t i = stack->top; i > 0; i--) {
         struct Value *node = stack->items[i];
         backward(node);
     }
@@ -388,18 +387,16 @@ backward_stack(struct Stack *stack)
 void
 forward_stack(struct Stack *stack, double h)
 {
-    for(int i = 0; i <= stack->top; i++)
-    {
+    for (size_t i = 0; i <= stack->top; i++) {
         struct Value *node = stack->items[i];
         node->data += node->grad * h;
     }
 }
 
 void
-gradient_descent(struct Stack *stack, double h, int n)
+gradient_descent(struct Stack *stack, double h, size_t n)
 {
-    for (int i = 0; i < n; ++i)
-    {
+    for (size_t i = 0; i < n; ++i) {
         backward_stack(stack);
         forward_stack(stack, h);
     }
@@ -408,8 +405,7 @@ gradient_descent(struct Stack *stack, double h, int n)
 void
 print_stack(struct Stack *stack)
 {
-    for(int i = stack->top; i >= 0; i--)
-    {
+    for (size_t i = stack->top; i > 0; i--) {
         print_node(stack->items[i]);
     }
 }

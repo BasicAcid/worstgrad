@@ -14,7 +14,7 @@ struct Value
     unsigned int visited : 1; // For topological sort.
 };
 
-// Define operations enum
+// Define operations enum.
 typedef enum {
     VALUE,
     ADD,
@@ -25,8 +25,8 @@ typedef enum {
 struct Stack
 {
     struct Value **items;
-    int top;
-    int capacity;
+    size_t top;
+    size_t capacity;
 };
 
 struct Value create_value(double data, const char *label);
@@ -55,7 +55,7 @@ void push(struct Stack *stack, struct Value *new_value);
 struct Value *peek(struct Stack *stack);
 void init_stack(struct Stack *stack, size_t initial_capacity);
 void cleanup_stack(struct Stack *stack);
-void gradient_descent(struct Stack *stack, double h, int n);
+void gradient_descent(struct Stack *stack, double h, size_t n);
 void print_stack(struct Stack *stack);
 size_t get_graph_size(struct Value *node, size_t *graph_size);
 

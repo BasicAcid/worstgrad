@@ -200,7 +200,7 @@ test_1()
     size_t graph_size = 0;
     get_graph_size(&d, &graph_size);
 
-    printf("%d\n", graph_size);
+    //printf("%d\n", graph_size);
 
     /* struct Stack stack; */
 
